@@ -123,7 +123,7 @@ export interface PayoutAttemptV1 {
     targetPayout: Money;
     step: PayoutStep;
     attempt: number;
-    lastError: string | undefined;
+    lastError: string | null;
     firstAttemptAt: string;
 }
 
@@ -154,7 +154,7 @@ export interface IncidentUpdatedV1 {
     kind: string;
     subject: string;
     status: string;
-    rootCause: string | undefined;
+    rootCause: string | null;
     updatedAt: string;
 }
 
@@ -177,9 +177,9 @@ export interface ErrorEnvelope {
     status: number;
     code: string;
     correlationId: string;
-    detail: string | undefined;
-    instance: string | undefined;
-    errors: FieldError[] | undefined;
+    detail: string | null;
+    instance: string | null;
+    errors: FieldError[] | null;
 }
 
 export interface FieldError {

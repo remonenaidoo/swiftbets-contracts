@@ -30,6 +30,7 @@ public static class SchemaGenerator
             EnumStyle = TypeScriptEnumStyle.StringLiteral,
             MarkOptionalProperties = false,
             DateTimeType = TypeScriptDateTimeType.String,
+            NullValue = TypeScriptNullValue.Null,
         };
         var code = new TypeScriptGenerator(root, typeScriptSettings).GenerateFile("SwiftBetsContractsRoot");
         var header = "// Generated from SwiftBets.Contracts. Do not edit; run `dotnet run --project tools/SwiftBets.Contracts.SchemaGen`.\n";
