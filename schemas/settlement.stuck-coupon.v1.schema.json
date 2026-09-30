@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "StuckCouponV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "couponId",
+    "reason",
+    "evaluatedLegs",
+    "legCount",
+    "repaired",
+    "detectedAt"
+  ],
+  "properties": {
+    "couponId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "evaluatedLegs": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "legCount": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "repaired": {
+      "type": "boolean"
+    },
+    "detectedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

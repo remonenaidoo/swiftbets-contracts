@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "LegEvaluatedV1",
+  "type": "object",
+  "description": "Stage one of settlement: one leg judged against one version of its fixture's result. Keyed by coupon.",
+  "additionalProperties": false,
+  "required": [
+    "couponId",
+    "legId",
+    "fixtureId",
+    "resultVersion",
+    "outcome",
+    "evaluatedAt"
+  ],
+  "properties": {
+    "couponId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "legId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "fixtureId": {
+      "type": "string"
+    },
+    "resultVersion": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "outcome": {
+      "$ref": "#/definitions/LegOutcome"
+    },
+    "evaluatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "LegOutcome": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Won",
+        "Lost",
+        "Void"
+      ],
+      "enum": [
+        "won",
+        "lost",
+        "void"
+      ]
+    }
+  }
+}

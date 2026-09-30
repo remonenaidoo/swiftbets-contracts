@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "PayoutAttemptV1",
+  "type": "object",
+  "description": "A payout travelling the retry ladder (5s, 1m, 15m) or parked on the dead-letter topic.",
+  "additionalProperties": false,
+  "required": [
+    "couponId",
+    "punterId",
+    "settlementVersion",
+    "targetPayout",
+    "step",
+    "attempt",
+    "firstAttemptAt"
+  ],
+  "properties": {
+    "couponId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "punterId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "settlementVersion": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "targetPayout": {
+      "$ref": "#/definitions/Money"
+    },
+    "step": {
+      "$ref": "#/definitions/PayoutStep"
+    },
+    "attempt": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "lastError": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "firstAttemptAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    },
+    "PayoutStep": {
+      "type": "string",
+      "description": "Named, not positional: a retried payout resumes at the step it failed on, whatever steps are added later.",
+      "x-enumNames": [
+        "ComputeDelta",
+        "CreditWallet",
+        "RecordPayment"
+      ],
+      "enum": [
+        "computeDelta",
+        "creditWallet",
+        "recordPayment"
+      ]
+    }
+  }
+}

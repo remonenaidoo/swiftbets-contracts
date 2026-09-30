@@ -79,6 +79,65 @@ export interface SelectionV1 {
     odds: number;
 }
 
+/** Stage one of settlement: one leg judged against one version of its fixture's result. Keyed by coupon. */
+export interface LegEvaluatedV1 {
+    couponId: string;
+    legId: string;
+    fixtureId: string;
+    resultVersion: number;
+    outcome: LegOutcome;
+    evaluatedAt: string;
+}
+
+export type LegOutcome = "won" | "lost" | "void";
+
+/** Stage two: the coupon's settlement at SettlementVersion. A result correction produces a higher version; payout moves only the difference between TargetPayout and what it has already paid. */
+export interface CouponSettledV1 {
+    couponId: string;
+    punterId: string;
+    settlementVersion: number;
+    outcome: CouponOutcome;
+    stake: Money;
+    effectiveOdds: number;
+    targetPayout: Money;
+    settledAt: string;
+}
+
+export type CouponOutcome = "won" | "lost" | "void";
+
+export interface StuckCouponV1 {
+    couponId: string;
+    reason: string;
+    evaluatedLegs: number;
+    legCount: number;
+    repaired: boolean;
+    detectedAt: string;
+}
+
+/** A payout travelling the retry ladder (5s, 1m, 15m) or parked on the dead-letter topic. */
+export interface PayoutAttemptV1 {
+    couponId: string;
+    punterId: string;
+    settlementVersion: number;
+    targetPayout: Money;
+    step: PayoutStep;
+    attempt: number;
+    lastError: string | undefined;
+    firstAttemptAt: string;
+}
+
+/** Named, not positional: a retried payout resumes at the step it failed on, whatever steps are added later. */
+export type PayoutStep = "computeDelta" | "creditWallet" | "recordPayment";
+
+export interface PayoutCompletedV1 {
+    couponId: string;
+    punterId: string;
+    settlementVersion: number;
+    delta: Money;
+    paidToDate: Money;
+    completedAt: string;
+}
+
 /** RFC 7807 problem details plus a stable machine code and the request's correlation id. */
 export interface ErrorEnvelope {
     type: string;

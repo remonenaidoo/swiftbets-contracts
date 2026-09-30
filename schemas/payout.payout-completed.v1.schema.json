@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "PayoutCompletedV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "couponId",
+    "punterId",
+    "settlementVersion",
+    "delta",
+    "paidToDate",
+    "completedAt"
+  ],
+  "properties": {
+    "couponId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "punterId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "settlementVersion": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "delta": {
+      "$ref": "#/definitions/Money"
+    },
+    "paidToDate": {
+      "$ref": "#/definitions/Money"
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
