@@ -10,9 +10,11 @@ public static class ContractJson
 
     private static JsonSerializerOptions Create()
     {
+        // Nulls are written, never omitted: every constructor parameter is required on read, so an omitted null
+        // would make any nullable field unreadable (IncidentUpdatedV1 with no root cause did exactly that).
         var options = new JsonSerializerOptions(JsonSerializerDefaults.Web)
         {
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            DefaultIgnoreCondition = JsonIgnoreCondition.Never,
             RespectNullableAnnotations = true,
             RespectRequiredConstructorParameters = true,
         };
