@@ -1,0 +1,145 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "FixtureChangedV1",
+  "type": "object",
+  "description": "Full snapshot of a fixture's offer; OfferVersion increases on every price or status change.",
+  "additionalProperties": false,
+  "required": [
+    "fixtureId",
+    "competition",
+    "homeTeam",
+    "awayTeam",
+    "kickoffAt",
+    "status",
+    "offerVersion",
+    "markets",
+    "changedAt"
+  ],
+  "properties": {
+    "fixtureId": {
+      "type": "string"
+    },
+    "competition": {
+      "type": "string"
+    },
+    "homeTeam": {
+      "type": "string"
+    },
+    "awayTeam": {
+      "type": "string"
+    },
+    "kickoffAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "$ref": "#/definitions/FixtureStatus"
+    },
+    "offerVersion": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "markets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MarketV1"
+      }
+    },
+    "changedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "FixtureStatus": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Scheduled",
+        "InPlay",
+        "Finished",
+        "Postponed"
+      ],
+      "enum": [
+        "scheduled",
+        "inPlay",
+        "finished",
+        "postponed"
+      ]
+    },
+    "MarketV1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "marketId",
+        "type",
+        "status",
+        "selections"
+      ],
+      "properties": {
+        "marketId": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/MarketType"
+        },
+        "status": {
+          "$ref": "#/definitions/MarketStatus"
+        },
+        "selections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SelectionV1"
+          }
+        }
+      }
+    },
+    "MarketType": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "MatchResult",
+        "TotalGoalsOverUnder25"
+      ],
+      "enum": [
+        "matchResult",
+        "totalGoalsOverUnder25"
+      ]
+    },
+    "MarketStatus": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Open",
+        "Suspended",
+        "Closed"
+      ],
+      "enum": [
+        "open",
+        "suspended",
+        "closed"
+      ]
+    },
+    "SelectionV1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selectionId",
+        "name",
+        "odds"
+      ],
+      "properties": {
+        "selectionId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "odds": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    }
+  }
+}

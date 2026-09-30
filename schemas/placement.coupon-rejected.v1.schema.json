@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "CouponRejectedV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "couponId",
+    "punterId",
+    "reasonCode",
+    "rejectedAt"
+  ],
+  "properties": {
+    "couponId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "punterId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "reasonCode": {
+      "type": "string"
+    },
+    "rejectedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
