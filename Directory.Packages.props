@@ -1,0 +1,12 @@
+<Project>
+  <ItemGroup>
+    <PackageVersion Include="Google.Protobuf" Version="3.36.2" />
+    <PackageVersion Include="Grpc.Core.Api" Version="2.84.0" />
+    <PackageVersion Include="Grpc.Tools" Version="2.84.0" />
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.401" />
+    <PackageVersion Include="NJsonSchema" Version="11.6.1" />
+    <PackageVersion Include="NJsonSchema.CodeGeneration.TypeScript" Version="11.6.1" />
+    <PackageVersion Include="xunit.v3" Version="4.0.1" />
+    <PackageVersion Include="Shouldly" Version="4.3.0" />
+  </ItemGroup>
+</Project>

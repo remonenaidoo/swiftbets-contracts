@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ErrorEnvelope",
+  "type": "object",
+  "description": "RFC 7807 problem details plus a stable machine code and the request's correlation id.",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "title",
+    "status",
+    "code",
+    "correlationId"
+  ],
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "status": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "code": {
+      "type": "string"
+    },
+    "correlationId": {
+      "type": "string"
+    },
+    "detail": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "instance": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "errors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/FieldError"
+      }
+    }
+  },
+  "definitions": {
+    "FieldError": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "code",
+        "message"
+      ],
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

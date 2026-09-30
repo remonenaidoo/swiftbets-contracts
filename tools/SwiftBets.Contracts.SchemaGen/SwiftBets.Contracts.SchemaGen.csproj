@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NJsonSchema" />
+    <PackageReference Include="NJsonSchema.CodeGeneration.TypeScript" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/SwiftBets.Contracts/SwiftBets.Contracts.csproj" />
+  </ItemGroup>
+</Project>

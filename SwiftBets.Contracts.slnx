@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SwiftBets.Contracts.Grpc/SwiftBets.Contracts.Grpc.csproj" />
+    <Project Path="src/SwiftBets.Contracts/SwiftBets.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SwiftBets.Contracts.Tests/SwiftBets.Contracts.Tests.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/SwiftBets.Contracts.SchemaGen/SwiftBets.Contracts.SchemaGen.csproj" />
+  </Folder>
+</Solution>

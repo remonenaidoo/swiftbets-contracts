@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "CouponPlacedV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "couponId",
+    "punterId",
+    "betType",
+    "stake",
+    "totalOdds",
+    "potentialPayout",
+    "legs",
+    "placedAt"
+  ],
+  "properties": {
+    "couponId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "punterId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "betType": {
+      "$ref": "#/definitions/BetType"
+    },
+    "stake": {
+      "$ref": "#/definitions/Money"
+    },
+    "totalOdds": {
+      "type": "number",
+      "format": "decimal"
+    },
+    "potentialPayout": {
+      "$ref": "#/definitions/Money"
+    },
+    "legs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CouponLegV1"
+      }
+    },
+    "placedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "BetType": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Single",
+        "Accumulator"
+      ],
+      "enum": [
+        "single",
+        "accumulator"
+      ]
+    },
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    },
+    "CouponLegV1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "legId",
+        "fixtureId",
+        "marketId",
+        "selectionId",
+        "odds",
+        "offerVersion"
+      ],
+      "properties": {
+        "legId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "fixtureId": {
+          "type": "string"
+        },
+        "marketId": {
+          "type": "string"
+        },
+        "selectionId": {
+          "type": "string"
+        },
+        "odds": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "offerVersion": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}

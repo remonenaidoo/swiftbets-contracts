@@ -1,0 +1,115 @@
+syntax = "proto3";
+
+package swiftbets.wallet.v1;
+
+option csharp_namespace = "SwiftBets.Contracts.Grpc.Wallet.V1";
+
+// Every mutating call is idempotent on idempotency_key: a repeat returns the original outcome with was_applied = false.
+service Wallet {
+  rpc Reserve (ReserveRequest) returns (ReservationReply);
+  rpc Capture (ReservationCommand) returns (ReservationReply);
+  rpc Release (ReservationCommand) returns (ReservationReply);
+  rpc Credit (PostingRequest) returns (PostingReply);
+  rpc Debit (PostingRequest) returns (PostingReply);
+  rpc GetBalance (GetBalanceRequest) returns (BalanceReply);
+  rpc GetReservation (GetReservationRequest) returns (ReservationReply);
+}
+
+message Money {
+  int64 minor_units = 1;
+  string currency = 2;
+}
+
+message Balance {
+  string account_id = 1;
+  Money available = 2;
+  Money reserved = 3;
+}
+
+enum ReservationState {
+  RESERVATION_STATE_UNSPECIFIED = 0;
+  RESERVATION_STATE_HELD = 1;
+  RESERVATION_STATE_CAPTURED = 2;
+  RESERVATION_STATE_RELEASED = 3;
+}
+
+enum WalletFailureCode {
+  WALLET_FAILURE_CODE_UNSPECIFIED = 0;
+  WALLET_FAILURE_CODE_INSUFFICIENT_FUNDS = 1;
+  WALLET_FAILURE_CODE_ACCOUNT_NOT_FOUND = 2;
+  WALLET_FAILURE_CODE_ACCOUNT_BLACKLISTED = 3;
+  WALLET_FAILURE_CODE_RESERVATION_NOT_FOUND = 4;
+  WALLET_FAILURE_CODE_INVALID_STATE = 5;
+  WALLET_FAILURE_CODE_CURRENCY_MISMATCH = 6;
+  WALLET_FAILURE_CODE_IDEMPOTENCY_CONFLICT = 7;
+}
+
+message WalletFailure {
+  WalletFailureCode code = 1;
+  string message = 2;
+}
+
+message ReserveRequest {
+  string idempotency_key = 1;
+  string account_id = 2;
+  Money amount = 3;
+  string reference = 4;
+}
+
+message ReservationCommand {
+  string idempotency_key = 1;
+  string reservation_id = 2;
+}
+
+message Reservation {
+  string reservation_id = 1;
+  string account_id = 2;
+  Money amount = 3;
+  ReservationState state = 4;
+  string reference = 5;
+}
+
+message ReservationReply {
+  bool was_applied = 1;
+  oneof outcome {
+    Reservation reservation = 2;
+    WalletFailure failure = 3;
+  }
+}
+
+message PostingRequest {
+  string idempotency_key = 1;
+  string account_id = 2;
+  Money amount = 3;
+  string reference = 4;
+  string reason = 5;
+}
+
+message Posting {
+  string posting_id = 1;
+  Balance balance = 2;
+}
+
+message PostingReply {
+  bool was_applied = 1;
+  oneof outcome {
+    Posting posting = 2;
+    WalletFailure failure = 3;
+  }
+}
+
+message GetBalanceRequest {
+  string account_id = 1;
+}
+
+message BalanceReply {
+  oneof outcome {
+    Balance balance = 1;
+    WalletFailure failure = 2;
+  }
+}
+
+message GetReservationRequest {
+  string reservation_id = 1;
+  string idempotency_key = 2;
+}

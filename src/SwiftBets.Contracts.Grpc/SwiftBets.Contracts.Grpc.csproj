@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageId>SwiftBets.Contracts.Grpc</PackageId>
+    <Description>SwiftBets gRPC contracts (wallet v1): generated client and server stubs.</Description>
+    <NoWarn>$(NoWarn);CS1591;CA1707;CA1822;CA1062;CA1034;CA2227;CA1819;CA1716;CA1724</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" />
+    <PackageReference Include="Grpc.Core.Api" />
+    <PackageReference Include="Grpc.Tools" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
+    <Protobuf Include="../../protos/swiftbets/wallet/v1/wallet.proto" ProtoRoot="../../protos" GrpcServices="Both" />
+    <None Include="../../protos/**/*.proto" Pack="true" PackagePath="protos" />
+  </ItemGroup>
+</Project>

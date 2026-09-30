@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ResultPublishedV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "fixtureId",
+    "resultVersion",
+    "status",
+    "homeGoals",
+    "awayGoals",
+    "publishedAt"
+  ],
+  "properties": {
+    "fixtureId": {
+      "type": "string"
+    },
+    "resultVersion": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "status": {
+      "$ref": "#/definitions/ResultStatus"
+    },
+    "homeGoals": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "awayGoals": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "ResultStatus": {
+      "type": "string",
+      "description": "Ordered by precedence: a higher value outranks a lower one at the same result version.",
+      "x-enumNames": [
+        "Provisional",
+        "Official",
+        "Correction",
+        "Void"
+      ],
+      "enum": [
+        "provisional",
+        "official",
+        "correction",
+        "void"
+      ]
+    }
+  }
+}

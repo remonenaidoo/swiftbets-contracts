@@ -1,0 +1,32 @@
+namespace SwiftBets.Contracts.Messaging;
+
+public static class Topics
+{
+    public const string FixtureChanged = "offer.fixture-changed.v1";
+    public const string PriceChanged = "offer.price-changed.v1";
+    public const string ResultPublished = "offer.result-published.v1";
+    public const string CouponPlaced = "placement.coupon-placed.v1";
+    public const string CouponRejected = "placement.coupon-rejected.v1";
+    public const string LedgerPosted = "wallet.ledger-posted.v1";
+    public const string LegEvaluated = "settlement.leg-evaluated.v1";
+    public const string CouponSettled = "settlement.coupon-settled.v1";
+    public const string StuckCoupon = "settlement.stuck-coupon.v1";
+    public const string PayoutRetry5Seconds = "payout.retry-5s.v1";
+    public const string PayoutRetry1Minute = "payout.retry-1m.v1";
+    public const string PayoutRetry15Minutes = "payout.retry-15m.v1";
+    public const string PayoutDeadLetter = "payout.dead-letter.v1";
+    public const string PayoutCompleted = "payout.payout-completed.v1";
+    public const string IncidentRaised = "steward.incident-raised.v1";
+    public const string IncidentUpdated = "steward.incident-updated.v1";
+    public const string RemediationExecuted = "steward.remediation-executed.v1";
+    public const string LiabilityChanged = "risk.liability-changed.v1";
+    public const string RiskAlert = "risk.risk-alert.v1";
+
+    public static IReadOnlyList<string> All { get; } =
+    [
+        FixtureChanged, PriceChanged, ResultPublished, CouponPlaced, CouponRejected, LedgerPosted,
+        LegEvaluated, CouponSettled, StuckCoupon, PayoutRetry5Seconds, PayoutRetry1Minute,
+        PayoutRetry15Minutes, PayoutDeadLetter, PayoutCompleted, IncidentRaised, IncidentUpdated,
+        RemediationExecuted, LiabilityChanged, RiskAlert,
+    ];
+}
