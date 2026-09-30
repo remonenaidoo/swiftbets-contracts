@@ -2,12 +2,13 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "PayoutAttemptV1",
   "type": "object",
-  "description": "A payout travelling the retry ladder (5s, 1m, 15m) or parked on the dead-letter topic.",
+  "description": "A payout travelling the retry ladder (5s, 1m, 15m) or parked on the dead-letter topic. It carries the settlement\noutcome so every retry derives exactly the same wallet idempotency key as the first attempt.",
   "additionalProperties": false,
   "required": [
     "couponId",
     "punterId",
     "settlementVersion",
+    "outcome",
     "targetPayout",
     "step",
     "attempt",
@@ -25,6 +26,9 @@
     "settlementVersion": {
       "type": "integer",
       "format": "int32"
+    },
+    "outcome": {
+      "$ref": "#/definitions/CouponOutcome"
     },
     "targetPayout": {
       "$ref": "#/definitions/Money"
@@ -48,6 +52,20 @@
     }
   },
   "definitions": {
+    "CouponOutcome": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Won",
+        "Lost",
+        "Void"
+      ],
+      "enum": [
+        "won",
+        "lost",
+        "void"
+      ]
+    },
     "Money": {
       "type": "object",
       "description": "An amount in minor units (cents) of an ISO 4217 currency.",

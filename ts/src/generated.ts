@@ -114,11 +114,12 @@ export interface StuckCouponV1 {
     detectedAt: string;
 }
 
-/** A payout travelling the retry ladder (5s, 1m, 15m) or parked on the dead-letter topic. */
+/** A payout travelling the retry ladder (5s, 1m, 15m) or parked on the dead-letter topic. It carries the settlement outcome so every retry derives exactly the same wallet idempotency key as the first attempt. */
 export interface PayoutAttemptV1 {
     couponId: string;
     punterId: string;
     settlementVersion: number;
+    outcome: CouponOutcome;
     targetPayout: Money;
     step: PayoutStep;
     attempt: number;

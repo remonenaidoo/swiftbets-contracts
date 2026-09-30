@@ -2,11 +2,15 @@ using SwiftBets.Contracts.Messaging;
 
 namespace SwiftBets.Contracts.Payout;
 
-/// <summary>A payout travelling the retry ladder (5s, 1m, 15m) or parked on the dead-letter topic.</summary>
+/// <summary>
+/// A payout travelling the retry ladder (5s, 1m, 15m) or parked on the dead-letter topic. It carries the settlement
+/// outcome so every retry derives exactly the same wallet idempotency key as the first attempt.
+/// </summary>
 public sealed record PayoutAttemptV1(
     Guid CouponId,
     Guid PunterId,
     int SettlementVersion,
+    Settlement.CouponOutcome Outcome,
     Money.Money TargetPayout,
     PayoutStep Step,
     int Attempt,
