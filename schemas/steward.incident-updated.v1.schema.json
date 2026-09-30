@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "IncidentUpdatedV1",
+  "type": "object",
+  "description": "An incident changed status (diagnosing, awaitingApproval, diagnosisFailed, resolved).",
+  "additionalProperties": false,
+  "required": [
+    "incidentId",
+    "kind",
+    "subject",
+    "status",
+    "updatedAt"
+  ],
+  "properties": {
+    "incidentId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "rootCause": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

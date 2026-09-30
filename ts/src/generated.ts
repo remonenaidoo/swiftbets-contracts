@@ -139,6 +139,37 @@ export interface PayoutCompletedV1 {
     completedAt: string;
 }
 
+/** A detector opened an incident. Kind is one of stuckCoupon, walletOutage, poisonMessage, duplicateSettlement. */
+export interface IncidentRaisedV1 {
+    incidentId: string;
+    kind: string;
+    subject: string;
+    summary: string;
+    openedAt: string;
+}
+
+/** An incident changed status (diagnosing, awaitingApproval, diagnosisFailed, resolved). */
+export interface IncidentUpdatedV1 {
+    incidentId: string;
+    kind: string;
+    subject: string;
+    status: string;
+    rootCause: string | undefined;
+    updatedAt: string;
+}
+
+/** An operator-approved remediation ran against the platform. */
+export interface RemediationExecutedV1 {
+    incidentId: string;
+    actionId: string;
+    actionType: string;
+    target: string;
+    succeeded: boolean;
+    outcome: string;
+    decidedBy: string;
+    executedAt: string;
+}
+
 /** RFC 7807 problem details plus a stable machine code and the request's correlation id. */
 export interface ErrorEnvelope {
     type: string;

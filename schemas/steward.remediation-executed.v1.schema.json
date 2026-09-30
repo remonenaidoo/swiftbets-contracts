@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "RemediationExecutedV1",
+  "type": "object",
+  "description": "An operator-approved remediation ran against the platform.",
+  "additionalProperties": false,
+  "required": [
+    "incidentId",
+    "actionId",
+    "actionType",
+    "target",
+    "succeeded",
+    "outcome",
+    "decidedBy",
+    "executedAt"
+  ],
+  "properties": {
+    "incidentId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "actionId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "actionType": {
+      "type": "string"
+    },
+    "target": {
+      "type": "string"
+    },
+    "succeeded": {
+      "type": "boolean"
+    },
+    "outcome": {
+      "type": "string"
+    },
+    "decidedBy": {
+      "type": "string"
+    },
+    "executedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

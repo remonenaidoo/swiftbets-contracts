@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "IncidentRaisedV1",
+  "type": "object",
+  "description": "A detector opened an incident. Kind is one of stuckCoupon, walletOutage, poisonMessage, duplicateSettlement.",
+  "additionalProperties": false,
+  "required": [
+    "incidentId",
+    "kind",
+    "subject",
+    "summary",
+    "openedAt"
+  ],
+  "properties": {
+    "incidentId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "openedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
