@@ -374,6 +374,16 @@ export interface PaymentDriftDetectedV1 {
     detectedAt: string;
 }
 
+/** One operational setting, keyed by Key on a compacted topic: the latest record is the value in force. Version only increases per key, so a consumer drops anything older than what it holds. Value is text; see ConfigKeys for the keys services read and how each is parsed. */
+export interface ConfigEntryV1 {
+    key: string;
+    value: string;
+    version: number;
+    changedBy: string;
+    reason: string;
+    changedAt: string;
+}
+
 /** RFC 7807 problem details plus a stable machine code and the request's correlation id. */
 export interface ErrorEnvelope {
     type: string;

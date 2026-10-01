@@ -1,5 +1,6 @@
 using SwiftBets.Contracts.Audit;
 using SwiftBets.Contracts.Compliance;
+using SwiftBets.Contracts.Config;
 using SwiftBets.Contracts.Errors;
 using SwiftBets.Contracts.Identity;
 using SwiftBets.Contracts.Notifications;
@@ -45,6 +46,7 @@ public static class ContractCatalog
         ($"{WithdrawalPaidV1.EventType}.v{WithdrawalPaidV1.EventVersion}", typeof(WithdrawalPaidV1)),
         ($"{WithdrawalFailedV1.EventType}.v{WithdrawalFailedV1.EventVersion}", typeof(WithdrawalFailedV1)),
         ($"{PaymentDriftDetectedV1.EventType}.v{PaymentDriftDetectedV1.EventVersion}", typeof(PaymentDriftDetectedV1)),
+        ($"{ConfigEntryV1.EventType}.v{ConfigEntryV1.EventVersion}", typeof(ConfigEntryV1)),
         ("error-envelope", typeof(ErrorEnvelope)),
     ];
 }
