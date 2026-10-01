@@ -15,6 +15,12 @@ export const topics = {
   remediationExecuted: 'steward.remediation-executed.v1',
   liabilityChanged: 'risk.liability-changed.v1',
   riskAlert: 'risk.risk-alert.v1',
+  userRegistered: 'identity.user-registered.v1',
+  emailVerified: 'identity.email-verified.v1',
+  accountStatusChanged: 'identity.account-status-changed.v1',
+  sessionRevoked: 'identity.session-revoked.v1',
+  auditRecorded: 'audit.audit-recorded.v1',
+  notificationRequested: 'notifications.notification-requested.v1',
 } as const;
 
 export type TopicBase = (typeof topics)[keyof typeof topics];

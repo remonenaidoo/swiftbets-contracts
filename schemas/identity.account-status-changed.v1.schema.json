@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "AccountStatusChangedV1",
+  "type": "object",
+  "description": "An account moved between active, suspended, closed and self-excluded. ChangedBy is a user id or a service name.",
+  "additionalProperties": false,
+  "required": [
+    "userId",
+    "previousStatus",
+    "status",
+    "reason",
+    "changedBy",
+    "changedAt"
+  ],
+  "properties": {
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "previousStatus": {
+      "$ref": "#/definitions/AccountStatus"
+    },
+    "status": {
+      "$ref": "#/definitions/AccountStatus"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "changedBy": {
+      "type": "string"
+    },
+    "changedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "AccountStatus": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Active",
+        "Suspended",
+        "Closed",
+        "SelfExcluded"
+      ],
+      "enum": [
+        "active",
+        "suspended",
+        "closed",
+        "selfExcluded"
+      ]
+    }
+  }
+}

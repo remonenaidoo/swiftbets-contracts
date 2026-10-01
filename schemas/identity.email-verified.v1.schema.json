@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "EmailVerifiedV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "userId",
+    "verifiedAt"
+  ],
+  "properties": {
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "verifiedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
