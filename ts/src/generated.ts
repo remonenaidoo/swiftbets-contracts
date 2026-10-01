@@ -11,7 +11,7 @@ export interface CouponPlacedV1 {
     placedAt: string;
 }
 
-export type BetType = "single" | "accumulator";
+export type BetType = "single" | "accumulator" | "system";
 
 /** An amount in minor units (cents) of an ISO 4217 currency. */
 export interface Money {
