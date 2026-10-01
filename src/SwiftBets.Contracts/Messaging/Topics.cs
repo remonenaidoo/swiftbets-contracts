@@ -41,6 +41,9 @@ public static class Topics
     public const string WithdrawalFailed = "payments.withdrawal-failed.v1";
     public const string PaymentDriftDetected = "payments.drift-detected.v1";
 
+    /// <summary>Compacted, keyed by setting key: the latest record per key is the value in force.</summary>
+    public const string ConfigEntries = "config.entries.v1";
+
     public static IReadOnlyList<string> All { get; } =
     [
         FixtureChanged, PriceChanged, ResultPublished, CouponPlaced, CouponRejected, LedgerPosted,
@@ -49,6 +52,6 @@ public static class Topics
         RemediationExecuted, LiabilityChanged, RiskAlert, UserRegistered, EmailVerified, AccountStatusChanged,
         SessionRevoked, AuditRecorded, NotificationRequested, LimitChanged, RestrictionsChanged, SelfExclusionStarted,
         KycStatusChanged, DepositSucceeded, DepositFailed, WithdrawalRequested, WithdrawalDecided, WithdrawalPaid,
-        WithdrawalFailed, PaymentDriftDetected,
+        WithdrawalFailed, PaymentDriftDetected, ConfigEntries,
     ];
 }

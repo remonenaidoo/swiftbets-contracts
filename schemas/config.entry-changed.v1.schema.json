@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ConfigEntryV1",
+  "type": "object",
+  "description": "One operational setting, keyed by Key on a compacted topic: the latest record is the value in force.\nVersion only increases per key, so a consumer drops anything older than what it holds. Value is text; see\nConfigKeys for the keys services read and how each is parsed.",
+  "additionalProperties": false,
+  "required": [
+    "key",
+    "value",
+    "version",
+    "changedBy",
+    "reason",
+    "changedAt"
+  ],
+  "properties": {
+    "key": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "changedBy": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "changedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
