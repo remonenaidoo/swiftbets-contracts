@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "DepositSucceededV1",
+  "type": "object",
+  "description": "A provider confirmed a deposit and the wallet credited it. Keyed by user id.",
+  "additionalProperties": false,
+  "required": [
+    "paymentId",
+    "userId",
+    "amount",
+    "provider",
+    "providerReference",
+    "completedAt"
+  ],
+  "properties": {
+    "paymentId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "amount": {
+      "$ref": "#/definitions/Money"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "providerReference": {
+      "type": "string"
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

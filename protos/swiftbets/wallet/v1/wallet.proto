@@ -13,6 +13,15 @@ service Wallet {
   rpc Debit (PostingRequest) returns (PostingReply);
   rpc GetBalance (GetBalanceRequest) returns (BalanceReply);
   rpc GetReservation (GetReservationRequest) returns (ReservationReply);
+  // A provider-confirmed deposit from the funding account, judged against deposit limits and restrictions.
+  rpc Deposit (PostingRequest) returns (PostingReply);
+  // Holds a withdrawal's amount; refused with ACCOUNT_RESTRICTED while withdrawals are blocked.
+  rpc HoldWithdrawal (ReserveRequest) returns (ReservationReply);
+  // Pays a held withdrawal out to the funding account. A failed or rejected withdrawal uses Release.
+  rpc CompleteWithdrawal (ReservationCommand) returns (ReservationReply);
+  // The customer's account in a currency, opened empty if it does not exist yet.
+  rpc OpenAccount (OpenAccountRequest) returns (BalanceReply);
+  rpc ListAccounts (ListAccountsRequest) returns (AccountsReply);
 }
 
 message Money {
@@ -24,6 +33,9 @@ message Balance {
   string account_id = 1;
   Money available = 2;
   Money reserved = 3;
+  // Bonus money: stakeable but not withdrawable.
+  Money bonus = 4;
+  string user_id = 5;
 }
 
 enum ReservationState {
@@ -116,4 +128,17 @@ message BalanceReply {
 message GetReservationRequest {
   string reservation_id = 1;
   string idempotency_key = 2;
+}
+
+message OpenAccountRequest {
+  string user_id = 1;
+  string currency = 2;
+}
+
+message ListAccountsRequest {
+  string user_id = 1;
+}
+
+message AccountsReply {
+  repeated Balance accounts = 1;
 }

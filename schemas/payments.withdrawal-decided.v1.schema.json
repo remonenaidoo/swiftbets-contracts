@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "WithdrawalDecidedV1",
+  "type": "object",
+  "description": "An operator approved or rejected a withdrawal held for approval; a rejection returns the hold.",
+  "additionalProperties": false,
+  "required": [
+    "withdrawalId",
+    "userId",
+    "approved",
+    "decidedBy",
+    "decidedAt"
+  ],
+  "properties": {
+    "withdrawalId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "approved": {
+      "type": "boolean"
+    },
+    "decidedBy": {
+      "type": "string"
+    },
+    "reason": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "decidedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

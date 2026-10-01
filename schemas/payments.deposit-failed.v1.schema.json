@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "DepositFailedV1",
+  "type": "object",
+  "description": "A deposit did not complete: the provider declined it or the wallet refused the credit (a limit or restriction).",
+  "additionalProperties": false,
+  "required": [
+    "paymentId",
+    "userId",
+    "amount",
+    "provider",
+    "reason",
+    "failedAt"
+  ],
+  "properties": {
+    "paymentId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "amount": {
+      "$ref": "#/definitions/Money"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "failedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
