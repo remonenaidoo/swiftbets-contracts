@@ -305,6 +305,75 @@ export interface KycStatusChangedV1 {
     changedAt: string;
 }
 
+/** A provider confirmed a deposit and the wallet credited it. Keyed by user id. */
+export interface DepositSucceededV1 {
+    paymentId: string;
+    userId: string;
+    amount: Money;
+    provider: string;
+    providerReference: string;
+    completedAt: string;
+}
+
+/** A deposit did not complete: the provider declined it or the wallet refused the credit (a limit or restriction). */
+export interface DepositFailedV1 {
+    paymentId: string;
+    userId: string;
+    amount: Money;
+    provider: string;
+    reason: string;
+    failedAt: string;
+}
+
+/** A customer asked to withdraw; the amount is held in the wallet. RequiresApproval is set above the operator threshold. */
+export interface WithdrawalRequestedV1 {
+    withdrawalId: string;
+    userId: string;
+    amount: Money;
+    requiresApproval: boolean;
+    requestedAt: string;
+}
+
+/** An operator approved or rejected a withdrawal held for approval; a rejection returns the hold. */
+export interface WithdrawalDecidedV1 {
+    withdrawalId: string;
+    userId: string;
+    approved: boolean;
+    decidedBy: string;
+    reason: string | null;
+    decidedAt: string;
+}
+
+/** The provider paid a withdrawal out and the wallet hold was captured. */
+export interface WithdrawalPaidV1 {
+    withdrawalId: string;
+    userId: string;
+    amount: Money;
+    provider: string;
+    providerReference: string;
+    paidAt: string;
+}
+
+/** A withdrawal ended without paying out (provider failure or rejection); the hold went back to the customer. */
+export interface WithdrawalFailedV1 {
+    withdrawalId: string;
+    userId: string;
+    amount: Money;
+    reason: string;
+    failedAt: string;
+}
+
+/** The daily provider-against-ledger reconciliation found differences for a provider and day. Keyed by provider. */
+export interface PaymentDriftDetectedV1 {
+    runId: string;
+    provider: string;
+    day: string;
+    driftCount: number;
+    netDifference: Money;
+    summary: string;
+    detectedAt: string;
+}
+
 /** RFC 7807 problem details plus a stable machine code and the request's correlation id. */
 export interface ErrorEnvelope {
     type: string;

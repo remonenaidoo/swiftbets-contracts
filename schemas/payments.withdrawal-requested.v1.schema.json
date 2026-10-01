@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "WithdrawalRequestedV1",
+  "type": "object",
+  "description": "A customer asked to withdraw; the amount is held in the wallet. RequiresApproval is set above the operator threshold.",
+  "additionalProperties": false,
+  "required": [
+    "withdrawalId",
+    "userId",
+    "amount",
+    "requiresApproval",
+    "requestedAt"
+  ],
+  "properties": {
+    "withdrawalId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "amount": {
+      "$ref": "#/definitions/Money"
+    },
+    "requiresApproval": {
+      "type": "boolean"
+    },
+    "requestedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

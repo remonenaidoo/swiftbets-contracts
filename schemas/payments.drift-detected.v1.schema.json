@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "PaymentDriftDetectedV1",
+  "type": "object",
+  "description": "The daily provider-against-ledger reconciliation found differences for a provider and day. Keyed by provider.",
+  "additionalProperties": false,
+  "required": [
+    "runId",
+    "provider",
+    "day",
+    "driftCount",
+    "netDifference",
+    "summary",
+    "detectedAt"
+  ],
+  "properties": {
+    "runId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "day": {
+      "type": "string",
+      "format": "date"
+    },
+    "driftCount": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "netDifference": {
+      "$ref": "#/definitions/Money"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "detectedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -33,6 +33,13 @@ public static class Topics
     public const string RestrictionsChanged = "compliance.restrictions-changed.v1";
     public const string SelfExclusionStarted = "compliance.self-exclusion-started.v1";
     public const string KycStatusChanged = "compliance.kyc-status-changed.v1";
+    public const string DepositSucceeded = "payments.deposit-succeeded.v1";
+    public const string DepositFailed = "payments.deposit-failed.v1";
+    public const string WithdrawalRequested = "payments.withdrawal-requested.v1";
+    public const string WithdrawalDecided = "payments.withdrawal-decided.v1";
+    public const string WithdrawalPaid = "payments.withdrawal-paid.v1";
+    public const string WithdrawalFailed = "payments.withdrawal-failed.v1";
+    public const string PaymentDriftDetected = "payments.drift-detected.v1";
 
     public static IReadOnlyList<string> All { get; } =
     [
@@ -41,6 +48,7 @@ public static class Topics
         PayoutRetry15Minutes, PayoutDeadLetter, PayoutCompleted, IncidentRaised, IncidentUpdated,
         RemediationExecuted, LiabilityChanged, RiskAlert, UserRegistered, EmailVerified, AccountStatusChanged,
         SessionRevoked, AuditRecorded, NotificationRequested, LimitChanged, RestrictionsChanged, SelfExclusionStarted,
-        KycStatusChanged,
+        KycStatusChanged, DepositSucceeded, DepositFailed, WithdrawalRequested, WithdrawalDecided, WithdrawalPaid,
+        WithdrawalFailed, PaymentDriftDetected,
     ];
 }
