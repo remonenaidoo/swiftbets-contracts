@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "CouponPlacedV2",
+  "type": "object",
+  "description": "A placed coupon with one or more bets over its legs. Replaces CouponPlacedV1, which is dual-published until 2.0.0.",
+  "additionalProperties": false,
+  "required": [
+    "couponId",
+    "punterId",
+    "totalStake",
+    "potentialPayout",
+    "legs",
+    "bets",
+    "placedAt"
+  ],
+  "properties": {
+    "couponId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "punterId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "totalStake": {
+      "$ref": "#/definitions/Money"
+    },
+    "potentialPayout": {
+      "$ref": "#/definitions/Money"
+    },
+    "legs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CouponLegV2"
+      }
+    },
+    "bets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CouponBetV2"
+      }
+    },
+    "placedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    },
+    "CouponLegV2": {
+      "type": "object",
+      "description": "A leg of a V2 coupon. A banker is in every line of every bet on the coupon.",
+      "additionalProperties": false,
+      "required": [
+        "legId",
+        "fixtureId",
+        "marketId",
+        "selectionId",
+        "odds",
+        "offerVersion",
+        "isBanker"
+      ],
+      "properties": {
+        "legId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "fixtureId": {
+          "type": "string"
+        },
+        "marketId": {
+          "type": "string"
+        },
+        "selectionId": {
+          "type": "string"
+        },
+        "odds": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "offerVersion": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isBanker": {
+          "type": "boolean"
+        }
+      }
+    },
+    "CouponBetV2": {
+      "type": "object",
+      "description": "One bet on a coupon: every combination of each size in Folds taken from the non-banker legs, with the\nbankers added to each. A Trixie on three selections is folds [2, 3]; singles are [1]; an accumulator of n is [n].\nStake is UnitStake times Lines.",
+      "additionalProperties": false,
+      "required": [
+        "betId",
+        "name",
+        "folds",
+        "lines",
+        "unitStake",
+        "stake",
+        "potentialPayout"
+      ],
+      "properties": {
+        "betId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "folds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "lines": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unitStake": {
+          "$ref": "#/definitions/Money"
+        },
+        "stake": {
+          "$ref": "#/definitions/Money"
+        },
+        "potentialPayout": {
+          "$ref": "#/definitions/Money"
+        }
+      }
+    }
+  }
+}

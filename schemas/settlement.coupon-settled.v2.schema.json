@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "CouponSettledV2",
+  "type": "object",
+  "description": "A V2 coupon's settlement at SettlementVersion. The coupon is Won when it returns more than nothing\nbut not only stakes back, Void when every line is void, otherwise Lost. Payout moves the difference between\nTargetPayout and what it has already paid, as with CouponSettledV1.",
+  "additionalProperties": false,
+  "required": [
+    "couponId",
+    "punterId",
+    "settlementVersion",
+    "outcome",
+    "totalStake",
+    "targetPayout",
+    "bets",
+    "settledAt"
+  ],
+  "properties": {
+    "couponId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "punterId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "settlementVersion": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "outcome": {
+      "$ref": "#/definitions/CouponOutcome"
+    },
+    "totalStake": {
+      "$ref": "#/definitions/Money"
+    },
+    "targetPayout": {
+      "$ref": "#/definitions/Money"
+    },
+    "bets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/BetSettlementV2"
+      }
+    },
+    "settledAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "CouponOutcome": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Won",
+        "Lost",
+        "Void"
+      ],
+      "enum": [
+        "won",
+        "lost",
+        "void"
+      ]
+    },
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    },
+    "BetSettlementV2": {
+      "type": "object",
+      "description": "One bet's settlement: how its lines fell and what it returns.",
+      "additionalProperties": false,
+      "required": [
+        "betId",
+        "outcome",
+        "winningLines",
+        "voidLines",
+        "losingLines",
+        "return"
+      ],
+      "properties": {
+        "betId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "outcome": {
+          "$ref": "#/definitions/CouponOutcome"
+        },
+        "winningLines": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "voidLines": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "losingLines": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "return": {
+          "$ref": "#/definitions/Money"
+        }
+      }
+    }
+  }
+}

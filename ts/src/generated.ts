@@ -374,6 +374,61 @@ export interface PaymentDriftDetectedV1 {
     detectedAt: string;
 }
 
+/** A placed coupon with one or more bets over its legs. Replaces CouponPlacedV1, which is dual-published until 2.0.0. */
+export interface CouponPlacedV2 {
+    couponId: string;
+    punterId: string;
+    totalStake: Money;
+    potentialPayout: Money;
+    legs: CouponLegV2[];
+    bets: CouponBetV2[];
+    placedAt: string;
+}
+
+/** A leg of a V2 coupon. A banker is in every line of every bet on the coupon. */
+export interface CouponLegV2 {
+    legId: string;
+    fixtureId: string;
+    marketId: string;
+    selectionId: string;
+    odds: number;
+    offerVersion: number;
+    isBanker: boolean;
+}
+
+/** One bet on a coupon: every combination of each size in Folds taken from the non-banker legs, with the bankers added to each. A Trixie on three selections is folds [2, 3]; singles are [1]; an accumulator of n is [n]. Stake is UnitStake times Lines. */
+export interface CouponBetV2 {
+    betId: string;
+    name: string;
+    folds: number[];
+    lines: number;
+    unitStake: Money;
+    stake: Money;
+    potentialPayout: Money;
+}
+
+/** A V2 coupon's settlement at SettlementVersion. The coupon is Won when it returns more than nothing but not only stakes back, Void when every line is void, otherwise Lost. Payout moves the difference between TargetPayout and what it has already paid, as with CouponSettledV1. */
+export interface CouponSettledV2 {
+    couponId: string;
+    punterId: string;
+    settlementVersion: number;
+    outcome: CouponOutcome;
+    totalStake: Money;
+    targetPayout: Money;
+    bets: BetSettlementV2[];
+    settledAt: string;
+}
+
+/** One bet's settlement: how its lines fell and what it returns. */
+export interface BetSettlementV2 {
+    betId: string;
+    outcome: CouponOutcome;
+    winningLines: number;
+    voidLines: number;
+    losingLines: number;
+    return: Money;
+}
+
 /** One operational setting, keyed by Key on a compacted topic: the latest record is the value in force. Version only increases per key, so a consumer drops anything older than what it holds. Value is text; see ConfigKeys for the keys services read and how each is parsed. */
 export interface ConfigEntryV1 {
     key: string;

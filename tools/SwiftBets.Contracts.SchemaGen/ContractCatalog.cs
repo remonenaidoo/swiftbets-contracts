@@ -46,6 +46,8 @@ public static class ContractCatalog
         ($"{WithdrawalPaidV1.EventType}.v{WithdrawalPaidV1.EventVersion}", typeof(WithdrawalPaidV1)),
         ($"{WithdrawalFailedV1.EventType}.v{WithdrawalFailedV1.EventVersion}", typeof(WithdrawalFailedV1)),
         ($"{PaymentDriftDetectedV1.EventType}.v{PaymentDriftDetectedV1.EventVersion}", typeof(PaymentDriftDetectedV1)),
+        ($"{CouponPlacedV2.EventType}.v{CouponPlacedV2.EventVersion}", typeof(CouponPlacedV2)),
+        ($"{CouponSettledV2.EventType}.v{CouponSettledV2.EventVersion}", typeof(CouponSettledV2)),
         ($"{ConfigEntryV1.EventType}.v{ConfigEntryV1.EventVersion}", typeof(ConfigEntryV1)),
         ("error-envelope", typeof(ErrorEnvelope)),
     ];

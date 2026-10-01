@@ -10,6 +10,10 @@ public static class Topics
     public const string LedgerPosted = "wallet.ledger-posted.v1";
     public const string LegEvaluated = "settlement.leg-evaluated.v1";
     public const string CouponSettled = "settlement.coupon-settled.v1";
+
+    /// <summary>V2 coupons (bets over legs, bankers); dual-published beside the V1 topics until 2.0.0.</summary>
+    public const string CouponPlacedV2 = "placement.coupon-placed.v2";
+    public const string CouponSettledV2 = "settlement.coupon-settled.v2";
     public const string StuckCoupon = "settlement.stuck-coupon.v1";
     public const string PayoutRetry5Seconds = "payout.retry-5s.v1";
     public const string PayoutRetry1Minute = "payout.retry-1m.v1";
@@ -52,6 +56,6 @@ public static class Topics
         RemediationExecuted, LiabilityChanged, RiskAlert, UserRegistered, EmailVerified, AccountStatusChanged,
         SessionRevoked, AuditRecorded, NotificationRequested, LimitChanged, RestrictionsChanged, SelfExclusionStarted,
         KycStatusChanged, DepositSucceeded, DepositFailed, WithdrawalRequested, WithdrawalDecided, WithdrawalPaid,
-        WithdrawalFailed, PaymentDriftDetected, ConfigEntries,
+        WithdrawalFailed, PaymentDriftDetected, ConfigEntries, CouponPlacedV2, CouponSettledV2,
     ];
 }
