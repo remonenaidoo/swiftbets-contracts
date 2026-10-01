@@ -71,7 +71,7 @@ public sealed class BetModelV2Tests
     {
         var payload = new CouponRejectedV1(Guid.NewGuid(), Guid.NewGuid(), "price_changed", At);
         var platform = EventEnvelope<CouponRejectedV1>.Create(payload, At, "corr-1");
-        var web = EventEnvelope<CouponRejectedV1>.Create(payload, At, "corr-1", context: new EventContext("swiftbets", "ZA", "web"));
+        var web = EventEnvelope<CouponRejectedV1>.Create(payload, At, "corr-1", null, new EventContext("swiftbets", "ZA", "web"));
 
         platform.Context.ShouldBe(EventContext.Platform);
         web.Context!.Channel.ShouldBe("web");
