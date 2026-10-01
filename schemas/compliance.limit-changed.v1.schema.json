@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "LimitChangedV1",
+  "type": "object",
+  "description": "A money limit was set, lowered, raised or removed. Decreases take effect at once; increases and removals at EffectiveAt\nafter the cooling period. A null Amount means no limit.",
+  "additionalProperties": false,
+  "required": [
+    "userId",
+    "kind",
+    "period",
+    "effectiveAt",
+    "changedBy",
+    "changedAt"
+  ],
+  "properties": {
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "kind": {
+      "$ref": "#/definitions/LimitKind"
+    },
+    "period": {
+      "$ref": "#/definitions/LimitPeriod"
+    },
+    "previousAmount": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/Money"
+        }
+      ]
+    },
+    "amount": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/Money"
+        }
+      ]
+    },
+    "effectiveAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "changedBy": {
+      "type": "string"
+    },
+    "changedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "LimitKind": {
+      "type": "string",
+      "description": "What a responsible-gambling money limit caps over its period.",
+      "x-enumNames": [
+        "Deposit",
+        "Stake",
+        "Loss"
+      ],
+      "enum": [
+        "deposit",
+        "stake",
+        "loss"
+      ]
+    },
+    "LimitPeriod": {
+      "type": "string",
+      "description": "Calendar periods in the customer's jurisdiction time zone; a week starts on Monday.",
+      "x-enumNames": [
+        "Day",
+        "Week",
+        "Month"
+      ],
+      "enum": [
+        "day",
+        "week",
+        "month"
+      ]
+    },
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

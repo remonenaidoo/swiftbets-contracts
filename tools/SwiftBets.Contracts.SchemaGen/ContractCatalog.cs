@@ -1,4 +1,5 @@
 using SwiftBets.Contracts.Audit;
+using SwiftBets.Contracts.Compliance;
 using SwiftBets.Contracts.Errors;
 using SwiftBets.Contracts.Identity;
 using SwiftBets.Contracts.Notifications;
@@ -32,6 +33,10 @@ public static class ContractCatalog
         ($"{SessionRevokedV1.EventType}.v{SessionRevokedV1.EventVersion}", typeof(SessionRevokedV1)),
         ($"{AuditRecordedV1.EventType}.v{AuditRecordedV1.EventVersion}", typeof(AuditRecordedV1)),
         ($"{NotificationRequestedV1.EventType}.v{NotificationRequestedV1.EventVersion}", typeof(NotificationRequestedV1)),
+        ($"{LimitChangedV1.EventType}.v{LimitChangedV1.EventVersion}", typeof(LimitChangedV1)),
+        ($"{RestrictionsChangedV1.EventType}.v{RestrictionsChangedV1.EventVersion}", typeof(RestrictionsChangedV1)),
+        ($"{SelfExclusionStartedV1.EventType}.v{SelfExclusionStartedV1.EventVersion}", typeof(SelfExclusionStartedV1)),
+        ($"{KycStatusChangedV1.EventType}.v{KycStatusChangedV1.EventVersion}", typeof(KycStatusChangedV1)),
         ("error-envelope", typeof(ErrorEnvelope)),
     ];
 }
