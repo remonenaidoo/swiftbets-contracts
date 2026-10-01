@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "SessionRevokedV1",
+  "type": "object",
+  "description": "Sessions to end at once. A null SessionId means every session of the user (suspension, self-exclusion, closure).",
+  "additionalProperties": false,
+  "required": [
+    "userId",
+    "reason",
+    "revokedAt"
+  ],
+  "properties": {
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "sessionId": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "guid"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "revokedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -170,6 +170,68 @@ export interface RemediationExecutedV1 {
     executedAt: string;
 }
 
+/** A customer registered and passed the age gate. Carries no personal details; those stay in identity. */
+export interface UserRegisteredV1 {
+    userId: string;
+    brand: string;
+    country: string;
+    currency: string;
+    registeredAt: string;
+}
+
+export interface EmailVerifiedV1 {
+    userId: string;
+    verifiedAt: string;
+}
+
+/** An account moved between active, suspended, closed and self-excluded. ChangedBy is a user id or a service name. */
+export interface AccountStatusChangedV1 {
+    userId: string;
+    previousStatus: AccountStatus;
+    status: AccountStatus;
+    reason: string;
+    changedBy: string;
+    changedAt: string;
+}
+
+export type AccountStatus = "active" | "suspended" | "closed" | "selfExcluded";
+
+/** Sessions to end at once. A null SessionId means every session of the user (suspension, self-exclusion, closure). */
+export interface SessionRevokedV1 {
+    userId: string;
+    sessionId: string | null;
+    reason: string;
+    revokedAt: string;
+}
+
+/** One audited action, written through the owning service's outbox in the same transaction as the change. Before and After are JSON snapshots of the changed fields, null when not applicable. */
+export interface AuditRecordedV1 {
+    auditId: string;
+    service: string;
+    actor: string;
+    action: string;
+    subjectType: string;
+    subjectId: string;
+    before: string | null;
+    after: string | null;
+    correlationId: string;
+    occurredAt: string;
+}
+
+/** Asks notifications to send one message. Recipient is the address for the channel (empty for in-app). Marketing messages are suppressed for restricted or self-excluded customers; service messages are not. */
+export interface NotificationRequestedV1 {
+    notificationId: string;
+    userId: string;
+    channel: NotificationChannel;
+    template: string;
+    recipient: string;
+    data: { [key: string]: string; };
+    isMarketing: boolean;
+    requestedAt: string;
+}
+
+export type NotificationChannel = "email" | "push" | "inApp";
+
 /** RFC 7807 problem details plus a stable machine code and the request's correlation id. */
 export interface ErrorEnvelope {
     type: string;

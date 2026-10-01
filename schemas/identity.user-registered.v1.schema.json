@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "UserRegisteredV1",
+  "type": "object",
+  "description": "A customer registered and passed the age gate. Carries no personal details; those stay in identity.",
+  "additionalProperties": false,
+  "required": [
+    "userId",
+    "brand",
+    "country",
+    "currency",
+    "registeredAt"
+  ],
+  "properties": {
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "brand": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "registeredAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

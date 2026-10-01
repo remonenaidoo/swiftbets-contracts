@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "NotificationRequestedV1",
+  "type": "object",
+  "description": "Asks notifications to send one message. Recipient is the address for the channel (empty for in-app). Marketing\nmessages are suppressed for restricted or self-excluded customers; service messages are not.",
+  "additionalProperties": false,
+  "required": [
+    "notificationId",
+    "userId",
+    "channel",
+    "template",
+    "recipient",
+    "data",
+    "isMarketing",
+    "requestedAt"
+  ],
+  "properties": {
+    "notificationId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "channel": {
+      "$ref": "#/definitions/NotificationChannel"
+    },
+    "template": {
+      "type": "string"
+    },
+    "recipient": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "isMarketing": {
+      "type": "boolean"
+    },
+    "requestedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "NotificationChannel": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Email",
+        "Push",
+        "InApp"
+      ],
+      "enum": [
+        "email",
+        "push",
+        "inApp"
+      ]
+    }
+  }
+}

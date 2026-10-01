@@ -21,12 +21,19 @@ public static class Topics
     public const string RemediationExecuted = "steward.remediation-executed.v1";
     public const string LiabilityChanged = "risk.liability-changed.v1";
     public const string RiskAlert = "risk.risk-alert.v1";
+    public const string UserRegistered = "identity.user-registered.v1";
+    public const string EmailVerified = "identity.email-verified.v1";
+    public const string AccountStatusChanged = "identity.account-status-changed.v1";
+    public const string SessionRevoked = "identity.session-revoked.v1";
+    public const string AuditRecorded = "audit.audit-recorded.v1";
+    public const string NotificationRequested = "notifications.notification-requested.v1";
 
     public static IReadOnlyList<string> All { get; } =
     [
         FixtureChanged, PriceChanged, ResultPublished, CouponPlaced, CouponRejected, LedgerPosted,
         LegEvaluated, CouponSettled, StuckCoupon, PayoutRetry5Seconds, PayoutRetry1Minute,
         PayoutRetry15Minutes, PayoutDeadLetter, PayoutCompleted, IncidentRaised, IncidentUpdated,
-        RemediationExecuted, LiabilityChanged, RiskAlert,
+        RemediationExecuted, LiabilityChanged, RiskAlert, UserRegistered, EmailVerified, AccountStatusChanged,
+        SessionRevoked, AuditRecorded, NotificationRequested,
     ];
 }

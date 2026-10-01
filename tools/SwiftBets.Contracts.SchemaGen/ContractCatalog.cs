@@ -1,4 +1,7 @@
+using SwiftBets.Contracts.Audit;
 using SwiftBets.Contracts.Errors;
+using SwiftBets.Contracts.Identity;
+using SwiftBets.Contracts.Notifications;
 using SwiftBets.Contracts.Offer;
 using SwiftBets.Contracts.Payout;
 using SwiftBets.Contracts.Placement;
@@ -23,6 +26,12 @@ public static class ContractCatalog
         ($"{IncidentRaisedV1.EventType}.v{IncidentRaisedV1.EventVersion}", typeof(IncidentRaisedV1)),
         ($"{IncidentUpdatedV1.EventType}.v{IncidentUpdatedV1.EventVersion}", typeof(IncidentUpdatedV1)),
         ($"{RemediationExecutedV1.EventType}.v{RemediationExecutedV1.EventVersion}", typeof(RemediationExecutedV1)),
+        ($"{UserRegisteredV1.EventType}.v{UserRegisteredV1.EventVersion}", typeof(UserRegisteredV1)),
+        ($"{EmailVerifiedV1.EventType}.v{EmailVerifiedV1.EventVersion}", typeof(EmailVerifiedV1)),
+        ($"{AccountStatusChangedV1.EventType}.v{AccountStatusChangedV1.EventVersion}", typeof(AccountStatusChangedV1)),
+        ($"{SessionRevokedV1.EventType}.v{SessionRevokedV1.EventVersion}", typeof(SessionRevokedV1)),
+        ($"{AuditRecordedV1.EventType}.v{AuditRecordedV1.EventVersion}", typeof(AuditRecordedV1)),
+        ($"{NotificationRequestedV1.EventType}.v{NotificationRequestedV1.EventVersion}", typeof(NotificationRequestedV1)),
         ("error-envelope", typeof(ErrorEnvelope)),
     ];
 }

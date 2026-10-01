@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "AuditRecordedV1",
+  "type": "object",
+  "description": "One audited action, written through the owning service's outbox in the same transaction as the change.\nBefore and After are JSON snapshots of the changed fields, null when not applicable.",
+  "additionalProperties": false,
+  "required": [
+    "auditId",
+    "service",
+    "actor",
+    "action",
+    "subjectType",
+    "subjectId",
+    "correlationId",
+    "occurredAt"
+  ],
+  "properties": {
+    "auditId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "service": {
+      "type": "string"
+    },
+    "actor": {
+      "type": "string"
+    },
+    "action": {
+      "type": "string"
+    },
+    "subjectType": {
+      "type": "string"
+    },
+    "subjectId": {
+      "type": "string"
+    },
+    "before": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "after": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "correlationId": {
+      "type": "string"
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
