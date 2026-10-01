@@ -1,0 +1,209 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "RestrictionsChangedV1",
+  "type": "object",
+  "description": "The whole current responsible-gambling state of one account, keyed by user id on a compacted topic: the latest record is\nthe truth. Revision only increases, so a consumer drops anything older than what it holds.",
+  "additionalProperties": false,
+  "required": [
+    "userId",
+    "revision",
+    "limits",
+    "restrictions",
+    "kycStatus",
+    "changedAt"
+  ],
+  "properties": {
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "revision": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "limits": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MoneyLimit"
+      }
+    },
+    "restrictions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Restriction"
+      }
+    },
+    "sessionLimitMinutes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int32"
+    },
+    "realityCheckMinutes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int32"
+    },
+    "kycStatus": {
+      "$ref": "#/definitions/KycStatus"
+    },
+    "changedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "MoneyLimit": {
+      "type": "object",
+      "description": "Amount applies now. When PendingEffectiveAt has passed, PendingAmount applies instead (null: the limit is gone).",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "period",
+        "amount"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/LimitKind"
+        },
+        "period": {
+          "$ref": "#/definitions/LimitPeriod"
+        },
+        "amount": {
+          "$ref": "#/definitions/Money"
+        },
+        "pendingAmount": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/Money"
+            }
+          ]
+        },
+        "pendingEffectiveAt": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "LimitKind": {
+      "type": "string",
+      "description": "What a responsible-gambling money limit caps over its period.",
+      "x-enumNames": [
+        "Deposit",
+        "Stake",
+        "Loss"
+      ],
+      "enum": [
+        "deposit",
+        "stake",
+        "loss"
+      ]
+    },
+    "LimitPeriod": {
+      "type": "string",
+      "description": "Calendar periods in the customer's jurisdiction time zone; a week starts on Monday.",
+      "x-enumNames": [
+        "Day",
+        "Week",
+        "Month"
+      ],
+      "enum": [
+        "day",
+        "week",
+        "month"
+      ]
+    },
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    },
+    "Restriction": {
+      "type": "object",
+      "description": "Active from StartsAt until EndsAt; a null EndsAt lasts until an operator lifts it.",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "startsAt",
+        "reason"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/RestrictionKind"
+        },
+        "startsAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endsAt": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "RestrictionKind": {
+      "type": "string",
+      "description": "A block on part or all of an account. CoolingOff and SelfExclusion block everything, including marketing.",
+      "x-enumNames": [
+        "CoolingOff",
+        "SelfExclusion",
+        "NoDeposits",
+        "NoBetting",
+        "NoWithdrawals",
+        "NoMarketing"
+      ],
+      "enum": [
+        "coolingOff",
+        "selfExclusion",
+        "noDeposits",
+        "noBetting",
+        "noWithdrawals",
+        "noMarketing"
+      ]
+    },
+    "KycStatus": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "NotStarted",
+        "Pending",
+        "Verified",
+        "Rejected"
+      ],
+      "enum": [
+        "notStarted",
+        "pending",
+        "verified",
+        "rejected"
+      ]
+    }
+  }
+}

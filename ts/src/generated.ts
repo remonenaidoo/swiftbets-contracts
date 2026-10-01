@@ -232,6 +232,79 @@ export interface NotificationRequestedV1 {
 
 export type NotificationChannel = "email" | "push" | "inApp";
 
+/** A money limit was set, lowered, raised or removed. Decreases take effect at once; increases and removals at EffectiveAt after the cooling period. A null Amount means no limit. */
+export interface LimitChangedV1 {
+    userId: string;
+    kind: LimitKind;
+    period: LimitPeriod;
+    previousAmount: Money | null;
+    amount: Money | null;
+    effectiveAt: string;
+    changedBy: string;
+    changedAt: string;
+}
+
+/** What a responsible-gambling money limit caps over its period. */
+export type LimitKind = "deposit" | "stake" | "loss";
+
+/** Calendar periods in the customer's jurisdiction time zone; a week starts on Monday. */
+export type LimitPeriod = "day" | "week" | "month";
+
+/** The whole current responsible-gambling state of one account, keyed by user id on a compacted topic: the latest record is the truth. Revision only increases, so a consumer drops anything older than what it holds. */
+export interface RestrictionsChangedV1 {
+    userId: string;
+    revision: number;
+    limits: MoneyLimit[];
+    restrictions: Restriction[];
+    sessionLimitMinutes: number | null;
+    realityCheckMinutes: number | null;
+    kycStatus: KycStatus;
+    changedAt: string;
+}
+
+/** Amount applies now. When PendingEffectiveAt has passed, PendingAmount applies instead (null: the limit is gone). */
+export interface MoneyLimit {
+    kind: LimitKind;
+    period: LimitPeriod;
+    amount: Money;
+    pendingAmount: Money | null;
+    pendingEffectiveAt: string | null;
+}
+
+/** Active from StartsAt until EndsAt; a null EndsAt lasts until an operator lifts it. */
+export interface Restriction {
+    kind: RestrictionKind;
+    startsAt: string;
+    endsAt: string | null;
+    reason: string;
+}
+
+/** A block on part or all of an account. CoolingOff and SelfExclusion block everything, including marketing. */
+export type RestrictionKind = "coolingOff" | "selfExclusion" | "noDeposits" | "noBetting" | "noWithdrawals" | "noMarketing";
+
+export type KycStatus = "notStarted" | "pending" | "verified" | "rejected";
+
+/** A cooling-off or self-exclusion began. Identity ends every session and notifications stops all marketing. */
+export interface SelfExclusionStartedV1 {
+    userId: string;
+    kind: RestrictionKind;
+    startsAt: string;
+    endsAt: string | null;
+    reason: string;
+    changedBy: string;
+}
+
+/** A KYC case moved on. Provider names the verification adapter; Reason is set when a case is rejected. */
+export interface KycStatusChangedV1 {
+    userId: string;
+    caseId: string;
+    previousStatus: KycStatus;
+    status: KycStatus;
+    provider: string;
+    reason: string | null;
+    changedAt: string;
+}
+
 /** RFC 7807 problem details plus a stable machine code and the request's correlation id. */
 export interface ErrorEnvelope {
     type: string;

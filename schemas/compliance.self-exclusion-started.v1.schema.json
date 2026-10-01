@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "SelfExclusionStartedV1",
+  "type": "object",
+  "description": "A cooling-off or self-exclusion began. Identity ends every session and notifications stops all marketing.",
+  "additionalProperties": false,
+  "required": [
+    "userId",
+    "kind",
+    "startsAt",
+    "reason",
+    "changedBy"
+  ],
+  "properties": {
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "kind": {
+      "$ref": "#/definitions/RestrictionKind"
+    },
+    "startsAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endsAt": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "changedBy": {
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "RestrictionKind": {
+      "type": "string",
+      "description": "A block on part or all of an account. CoolingOff and SelfExclusion block everything, including marketing.",
+      "x-enumNames": [
+        "CoolingOff",
+        "SelfExclusion",
+        "NoDeposits",
+        "NoBetting",
+        "NoWithdrawals",
+        "NoMarketing"
+      ],
+      "enum": [
+        "coolingOff",
+        "selfExclusion",
+        "noDeposits",
+        "noBetting",
+        "noWithdrawals",
+        "noMarketing"
+      ]
+    }
+  }
+}

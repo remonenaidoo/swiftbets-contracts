@@ -27,6 +27,12 @@ public static class Topics
     public const string SessionRevoked = "identity.session-revoked.v1";
     public const string AuditRecorded = "audit.audit-recorded.v1";
     public const string NotificationRequested = "notifications.notification-requested.v1";
+    public const string LimitChanged = "compliance.limit-changed.v1";
+
+    /// <summary>Compacted, keyed by user id: the latest record per account is its whole responsible-gambling state.</summary>
+    public const string RestrictionsChanged = "compliance.restrictions-changed.v1";
+    public const string SelfExclusionStarted = "compliance.self-exclusion-started.v1";
+    public const string KycStatusChanged = "compliance.kyc-status-changed.v1";
 
     public static IReadOnlyList<string> All { get; } =
     [
@@ -34,6 +40,7 @@ public static class Topics
         LegEvaluated, CouponSettled, StuckCoupon, PayoutRetry5Seconds, PayoutRetry1Minute,
         PayoutRetry15Minutes, PayoutDeadLetter, PayoutCompleted, IncidentRaised, IncidentUpdated,
         RemediationExecuted, LiabilityChanged, RiskAlert, UserRegistered, EmailVerified, AccountStatusChanged,
-        SessionRevoked, AuditRecorded, NotificationRequested,
+        SessionRevoked, AuditRecorded, NotificationRequested, LimitChanged, RestrictionsChanged, SelfExclusionStarted,
+        KycStatusChanged,
     ];
 }

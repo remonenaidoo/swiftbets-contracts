@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "KycStatusChangedV1",
+  "type": "object",
+  "description": "A KYC case moved on. Provider names the verification adapter; Reason is set when a case is rejected.",
+  "additionalProperties": false,
+  "required": [
+    "userId",
+    "caseId",
+    "previousStatus",
+    "status",
+    "provider",
+    "changedAt"
+  ],
+  "properties": {
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "caseId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "previousStatus": {
+      "$ref": "#/definitions/KycStatus"
+    },
+    "status": {
+      "$ref": "#/definitions/KycStatus"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "reason": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "changedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "KycStatus": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "NotStarted",
+        "Pending",
+        "Verified",
+        "Rejected"
+      ],
+      "enum": [
+        "notStarted",
+        "pending",
+        "verified",
+        "rejected"
+      ]
+    }
+  }
+}

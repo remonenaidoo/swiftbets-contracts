@@ -21,6 +21,10 @@ export const topics = {
   sessionRevoked: 'identity.session-revoked.v1',
   auditRecorded: 'audit.audit-recorded.v1',
   notificationRequested: 'notifications.notification-requested.v1',
+  limitChanged: 'compliance.limit-changed.v1',
+  restrictionsChanged: 'compliance.restrictions-changed.v1',
+  selfExclusionStarted: 'compliance.self-exclusion-started.v1',
+  kycStatusChanged: 'compliance.kyc-status-changed.v1',
 } as const;
 
 export type TopicBase = (typeof topics)[keyof typeof topics];
