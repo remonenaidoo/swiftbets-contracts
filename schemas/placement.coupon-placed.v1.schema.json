@@ -52,11 +52,13 @@
       "description": "",
       "x-enumNames": [
         "Single",
-        "Accumulator"
+        "Accumulator",
+        "System"
       ],
       "enum": [
         "single",
-        "accumulator"
+        "accumulator",
+        "system"
       ]
     },
     "Money": {
