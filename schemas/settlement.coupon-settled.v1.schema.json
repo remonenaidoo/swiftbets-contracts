@@ -52,12 +52,14 @@
       "x-enumNames": [
         "Won",
         "Lost",
-        "Void"
+        "Void",
+        "CashedOut"
       ],
       "enum": [
         "won",
         "lost",
-        "void"
+        "void",
+        "cashedOut"
       ]
     },
     "Money": {

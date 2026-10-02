@@ -13,6 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <Protobuf Include="../../protos/swiftbets/wallet/v1/wallet.proto" ProtoRoot="../../protos" GrpcServices="Both" />
+    <Protobuf Include="../../protos/swiftbets/settlement/cashout/v1/cashout.proto" ProtoRoot="../../protos" GrpcServices="Both" />
     <None Include="../../protos/**/*.proto" Pack="true" PackagePath="protos" />
   </ItemGroup>
 </Project>

@@ -103,7 +103,7 @@ export interface CouponSettledV1 {
     settledAt: string;
 }
 
-export type CouponOutcome = "won" | "lost" | "void";
+export type CouponOutcome = "won" | "lost" | "void" | "cashedOut";
 
 export interface StuckCouponV1 {
     couponId: string;
