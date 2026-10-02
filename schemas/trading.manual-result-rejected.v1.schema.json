@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ManualResultRejectedV1",
+  "type": "object",
+  "description": "Settlement refused a manual result for one coupon; Code is stable, e.g. coupon_cashed_out.",
+  "additionalProperties": false,
+  "required": [
+    "manualResultId",
+    "couponId",
+    "code",
+    "message",
+    "rejectedAt"
+  ],
+  "properties": {
+    "manualResultId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "couponId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "code": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "rejectedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
