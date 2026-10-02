@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "LimitReachedV1",
+  "type": "object",
+  "description": "The wallet refused a stake or a deposit because it would pass one of the customer's own limits. Published so the\ncustomer is told; Refused is \"stake\" or \"deposit\".",
+  "additionalProperties": false,
+  "required": [
+    "userId",
+    "kind",
+    "period",
+    "refused",
+    "attempted",
+    "reachedAt"
+  ],
+  "properties": {
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "kind": {
+      "$ref": "#/definitions/LimitKind"
+    },
+    "period": {
+      "$ref": "#/definitions/LimitPeriod"
+    },
+    "refused": {
+      "type": "string"
+    },
+    "attempted": {
+      "$ref": "#/definitions/Money"
+    },
+    "reachedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "LimitKind": {
+      "type": "string",
+      "description": "What a responsible-gambling money limit caps over its period.",
+      "x-enumNames": [
+        "Deposit",
+        "Stake",
+        "Loss"
+      ],
+      "enum": [
+        "deposit",
+        "stake",
+        "loss"
+      ]
+    },
+    "LimitPeriod": {
+      "type": "string",
+      "description": "Calendar periods in the customer's jurisdiction time zone; a week starts on Monday.",
+      "x-enumNames": [
+        "Day",
+        "Week",
+        "Month"
+      ],
+      "enum": [
+        "day",
+        "week",
+        "month"
+      ]
+    },
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

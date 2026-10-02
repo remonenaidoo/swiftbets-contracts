@@ -44,6 +44,8 @@ public static class ContractCatalog
         ($"{LiabilityChangedV1.EventType}.v{LiabilityChangedV1.EventVersion}", typeof(LiabilityChangedV1)),
         ($"{RiskAlertV1.EventType}.v{RiskAlertV1.EventVersion}", typeof(RiskAlertV1)),
         ($"{ExposureLimitV1.EventType}.v{ExposureLimitV1.EventVersion}", typeof(ExposureLimitV1)),
+        ($"{LimitReachedV1.EventType}.v{LimitReachedV1.EventVersion}", typeof(LimitReachedV1)),
+        ($"{InboxMessageV1.EventType}.v{InboxMessageV1.EventVersion}", typeof(InboxMessageV1)),
         ($"{ProviderReconciliationV1.EventType}.v{ProviderReconciliationV1.EventVersion}", typeof(ProviderReconciliationV1)),
         ($"{DepositSucceededV1.EventType}.v{DepositSucceededV1.EventVersion}", typeof(DepositSucceededV1)),
         ($"{DepositFailedV1.EventType}.v{DepositFailedV1.EventVersion}", typeof(DepositFailedV1)),
