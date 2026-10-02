@@ -330,6 +330,26 @@ export interface ExposureLimitV1 {
     updatedAt: string;
 }
 
+/** The wallet refused a stake or a deposit because it would pass one of the customer's own limits. Published so the customer is told; Refused is "stake" or "deposit". */
+export interface LimitReachedV1 {
+    userId: string;
+    kind: LimitKind;
+    period: LimitPeriod;
+    refused: string;
+    attempted: Money;
+    reachedAt: string;
+}
+
+/** A message put in one customer's in-app inbox, keyed by user id; realtime pushes it to that customer only. */
+export interface InboxMessageV1 {
+    messageId: string;
+    userId: string;
+    category: string;
+    title: string;
+    body: string;
+    createdAt: string;
+}
+
 /** A provider's daily report compared with our ledger for the same business day. */
 export interface ProviderReconciliationV1 {
     providerId: string;

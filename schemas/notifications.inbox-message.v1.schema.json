@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "InboxMessageV1",
+  "type": "object",
+  "description": "A message put in one customer's in-app inbox, keyed by user id; realtime pushes it to that customer only.",
+  "additionalProperties": false,
+  "required": [
+    "messageId",
+    "userId",
+    "category",
+    "title",
+    "body",
+    "createdAt"
+  ],
+  "properties": {
+    "messageId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "userId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "category": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
