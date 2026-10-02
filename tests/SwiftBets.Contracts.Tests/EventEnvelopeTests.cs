@@ -1,6 +1,6 @@
 using System.Text.Json;
 using SwiftBets.Contracts.Messaging;
-using SwiftBets.Contracts.Placement;
+using SwiftBets.Contracts.Offer;
 using SwiftBets.Contracts.Serialization;
 
 namespace SwiftBets.Contracts.Tests;
