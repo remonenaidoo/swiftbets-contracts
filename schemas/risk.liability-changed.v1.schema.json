@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "LiabilityChangedV1",
+  "type": "object",
+  "description": "One fixture's open liability after a coupon was placed or settled, keyed by fixture id. Version rises with every\nchange, so a consumer keeps the highest it has seen; WorstCase is the largest liability over the outcomes.",
+  "additionalProperties": false,
+  "required": [
+    "fixtureId",
+    "version",
+    "outcomes",
+    "worstCase",
+    "changedAt"
+  ],
+  "properties": {
+    "fixtureId": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "outcomes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/OutcomeLiability"
+      }
+    },
+    "worstCase": {
+      "$ref": "#/definitions/Money"
+    },
+    "changedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "OutcomeLiability": {
+      "type": "object",
+      "description": "What the operator owes on one outcome if it wins: every open coupon backing it, at its full potential payout.",
+      "additionalProperties": false,
+      "required": [
+        "marketId",
+        "selectionId",
+        "stake",
+        "liability",
+        "coupons"
+      ],
+      "properties": {
+        "marketId": {
+          "type": "string"
+        },
+        "selectionId": {
+          "type": "string"
+        },
+        "stake": {
+          "$ref": "#/definitions/Money"
+        },
+        "liability": {
+          "$ref": "#/definitions/Money"
+        },
+        "coupons": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

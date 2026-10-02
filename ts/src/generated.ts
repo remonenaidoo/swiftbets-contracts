@@ -287,6 +287,49 @@ export interface CasinoTransactionV1 {
 /** What a casino transaction did to the player's money. */
 export type CasinoTransactionKind = "bet" | "win" | "rollback" | "freeSpinBet" | "transferIn" | "transferOut";
 
+/** One fixture's open liability after a coupon was placed or settled, keyed by fixture id. Version rises with every change, so a consumer keeps the highest it has seen; WorstCase is the largest liability over the outcomes. */
+export interface LiabilityChangedV1 {
+    fixtureId: string;
+    version: number;
+    outcomes: OutcomeLiability[];
+    worstCase: Money;
+    changedAt: string;
+}
+
+/** What the operator owes on one outcome if it wins: every open coupon backing it, at its full potential payout. */
+export interface OutcomeLiability {
+    marketId: string;
+    selectionId: string;
+    stake: Money;
+    liability: Money;
+    coupons: number;
+}
+
+/** Advisory: it refuses nothing. PunterIds and CouponIds are the bets that formed the pattern. */
+export interface RiskAlertV1 {
+    alertId: string;
+    kind: RiskAlertKind;
+    fixtureId: string;
+    selectionId: string | null;
+    punterIds: string[];
+    couponIds: string[];
+    totalStake: Money;
+    summary: string;
+    raisedAt: string;
+}
+
+/** A betting pattern worth a trader's look. */
+export type RiskAlertKind = "repeatedBet" | "correlatedStake";
+
+/** The exposure rule in force for one fixture, keyed by fixture id on a compacted topic: the latest record wins. Placement refuses new coupons on a Suspended fixture. CapMinorUnits is the worst-case liability that suspends it, null for the service default. */
+export interface ExposureLimitV1 {
+    fixtureId: string;
+    capMinorUnits: number | null;
+    suspended: boolean;
+    reason: string;
+    updatedAt: string;
+}
+
 /** A provider's daily report compared with our ledger for the same business day. */
 export interface ProviderReconciliationV1 {
     providerId: string;

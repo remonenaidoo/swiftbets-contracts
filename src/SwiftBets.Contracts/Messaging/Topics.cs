@@ -23,6 +23,9 @@ public static class Topics
     public const string RemediationExecuted = "steward.remediation-executed.v1";
     public const string LiabilityChanged = "risk.liability-changed.v1";
     public const string RiskAlert = "risk.risk-alert.v1";
+
+    /// <summary>Compacted, keyed by fixture id: the latest record per fixture is the exposure rule in force.</summary>
+    public const string ExposureLimits = "risk.exposure-limits.v1";
     public const string UserRegistered = "identity.user-registered.v1";
     public const string EmailVerified = "identity.email-verified.v1";
     public const string AccountStatusChanged = "identity.account-status-changed.v1";
@@ -59,6 +62,6 @@ public static class Topics
         RemediationExecuted, LiabilityChanged, RiskAlert, UserRegistered, EmailVerified, AccountStatusChanged,
         SessionRevoked, AuditRecorded, NotificationRequested, LimitChanged, RestrictionsChanged, SelfExclusionStarted,
         KycStatusChanged, DepositSucceeded, DepositFailed, WithdrawalRequested, WithdrawalDecided, WithdrawalPaid,
-        WithdrawalFailed, PaymentDriftDetected, ConfigEntries, CouponPlacedV2, CouponSettledV2, ManualResult, ManualResultRejected, MarketStatusChanged, CasinoTransaction, ProviderReconciliation,
+        WithdrawalFailed, PaymentDriftDetected, ConfigEntries, CouponPlacedV2, CouponSettledV2, ManualResult, ManualResultRejected, MarketStatusChanged, CasinoTransaction, ProviderReconciliation, ExposureLimits,
     ];
 }
