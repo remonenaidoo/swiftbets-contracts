@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ExposureLimitV1",
+  "type": "object",
+  "description": "The exposure rule in force for one fixture, keyed by fixture id on a compacted topic: the latest record wins.\nPlacement refuses new coupons on a Suspended fixture. CapMinorUnits is the worst-case liability that\nsuspends it, null for the service default.",
+  "additionalProperties": false,
+  "required": [
+    "fixtureId",
+    "suspended",
+    "reason",
+    "updatedAt"
+  ],
+  "properties": {
+    "fixtureId": {
+      "type": "string"
+    },
+    "capMinorUnits": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    },
+    "suspended": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

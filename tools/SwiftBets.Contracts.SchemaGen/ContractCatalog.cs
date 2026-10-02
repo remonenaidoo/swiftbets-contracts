@@ -6,6 +6,7 @@ using SwiftBets.Contracts.Identity;
 using SwiftBets.Contracts.Notifications;
 using SwiftBets.Contracts.Offer;
 using SwiftBets.Contracts.Casino;
+using SwiftBets.Contracts.Risk;
 using SwiftBets.Contracts.Payments;
 using SwiftBets.Contracts.Payout;
 using SwiftBets.Contracts.Placement;
@@ -40,6 +41,9 @@ public static class ContractCatalog
         ($"{SelfExclusionStartedV1.EventType}.v{SelfExclusionStartedV1.EventVersion}", typeof(SelfExclusionStartedV1)),
         ($"{KycStatusChangedV1.EventType}.v{KycStatusChangedV1.EventVersion}", typeof(KycStatusChangedV1)),
         ($"{CasinoTransactionV1.EventType}.v{CasinoTransactionV1.EventVersion}", typeof(CasinoTransactionV1)),
+        ($"{LiabilityChangedV1.EventType}.v{LiabilityChangedV1.EventVersion}", typeof(LiabilityChangedV1)),
+        ($"{RiskAlertV1.EventType}.v{RiskAlertV1.EventVersion}", typeof(RiskAlertV1)),
+        ($"{ExposureLimitV1.EventType}.v{ExposureLimitV1.EventVersion}", typeof(ExposureLimitV1)),
         ($"{ProviderReconciliationV1.EventType}.v{ProviderReconciliationV1.EventVersion}", typeof(ProviderReconciliationV1)),
         ($"{DepositSucceededV1.EventType}.v{DepositSucceededV1.EventVersion}", typeof(DepositSucceededV1)),
         ($"{DepositFailedV1.EventType}.v{DepositFailedV1.EventVersion}", typeof(DepositFailedV1)),

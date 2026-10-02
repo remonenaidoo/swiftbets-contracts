@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "RiskAlertV1",
+  "type": "object",
+  "description": "Advisory: it refuses nothing. PunterIds and CouponIds are the bets that formed the pattern.",
+  "additionalProperties": false,
+  "required": [
+    "alertId",
+    "kind",
+    "fixtureId",
+    "punterIds",
+    "couponIds",
+    "totalStake",
+    "summary",
+    "raisedAt"
+  ],
+  "properties": {
+    "alertId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "kind": {
+      "$ref": "#/definitions/RiskAlertKind"
+    },
+    "fixtureId": {
+      "type": "string"
+    },
+    "selectionId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "punterIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "guid"
+      }
+    },
+    "couponIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "guid"
+      }
+    },
+    "totalStake": {
+      "$ref": "#/definitions/Money"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "raisedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "RiskAlertKind": {
+      "type": "string",
+      "description": "A betting pattern worth a trader's look.",
+      "x-enumNames": [
+        "RepeatedBet",
+        "CorrelatedStake"
+      ],
+      "enum": [
+        "repeatedBet",
+        "correlatedStake"
+      ]
+    },
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
