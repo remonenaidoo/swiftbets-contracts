@@ -271,6 +271,37 @@ export interface KycStatusChangedV1 {
     changedAt: string;
 }
 
+/** One provider callback, applied once: ProviderTransactionId is the provider's own id and the idempotency key, so a duplicate callback never produces a second event. A rollback for a bet never seen is stored and still published, with Amount zero, so reconciliation can account for it. */
+export interface CasinoTransactionV1 {
+    transactionId: string;
+    providerId: string;
+    providerTransactionId: string;
+    roundId: string;
+    punterId: string;
+    gameId: string;
+    kind: CasinoTransactionKind;
+    amount: Money;
+    occurredAt: string;
+}
+
+/** What a casino transaction did to the player's money. */
+export type CasinoTransactionKind = "bet" | "win" | "rollback" | "freeSpinBet" | "transferIn" | "transferOut";
+
+/** A provider's daily report compared with our ledger for the same business day. */
+export interface ProviderReconciliationV1 {
+    providerId: string;
+    businessDate: string;
+    ourNet: Money;
+    providerNet: Money;
+    drift: Money;
+    missingOnOurSide: number;
+    missingOnProviderSide: number;
+    status: ReconciliationStatus;
+    reconciledAt: string;
+}
+
+export type ReconciliationStatus = "matched" | "drift";
+
 /** A provider confirmed a deposit and the wallet credited it. Keyed by user id. */
 export interface DepositSucceededV1 {
     paymentId: string;
