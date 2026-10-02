@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "CasinoTransactionV1",
+  "type": "object",
+  "description": "One provider callback, applied once: ProviderTransactionId is the provider's own id and the idempotency key, so\na duplicate callback never produces a second event. A rollback for a bet never seen is stored and still published,\nwith Amount zero, so reconciliation can account for it.",
+  "additionalProperties": false,
+  "required": [
+    "transactionId",
+    "providerId",
+    "providerTransactionId",
+    "roundId",
+    "punterId",
+    "gameId",
+    "kind",
+    "amount",
+    "occurredAt"
+  ],
+  "properties": {
+    "transactionId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "providerId": {
+      "type": "string"
+    },
+    "providerTransactionId": {
+      "type": "string"
+    },
+    "roundId": {
+      "type": "string"
+    },
+    "punterId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "gameId": {
+      "type": "string"
+    },
+    "kind": {
+      "$ref": "#/definitions/CasinoTransactionKind"
+    },
+    "amount": {
+      "$ref": "#/definitions/Money"
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "CasinoTransactionKind": {
+      "type": "string",
+      "description": "What a casino transaction did to the player's money.",
+      "x-enumNames": [
+        "Bet",
+        "Win",
+        "Rollback",
+        "FreeSpinBet",
+        "TransferIn",
+        "TransferOut"
+      ],
+      "enum": [
+        "bet",
+        "win",
+        "rollback",
+        "freeSpinBet",
+        "transferIn",
+        "transferOut"
+      ]
+    },
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

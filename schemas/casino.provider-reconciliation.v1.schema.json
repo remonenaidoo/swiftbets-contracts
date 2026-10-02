@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ProviderReconciliationV1",
+  "type": "object",
+  "description": "A provider's daily report compared with our ledger for the same business day.",
+  "additionalProperties": false,
+  "required": [
+    "providerId",
+    "businessDate",
+    "ourNet",
+    "providerNet",
+    "drift",
+    "missingOnOurSide",
+    "missingOnProviderSide",
+    "status",
+    "reconciledAt"
+  ],
+  "properties": {
+    "providerId": {
+      "type": "string"
+    },
+    "businessDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "ourNet": {
+      "$ref": "#/definitions/Money"
+    },
+    "providerNet": {
+      "$ref": "#/definitions/Money"
+    },
+    "drift": {
+      "$ref": "#/definitions/Money"
+    },
+    "missingOnOurSide": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "missingOnProviderSide": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "status": {
+      "$ref": "#/definitions/ReconciliationStatus"
+    },
+    "reconciledAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "Money": {
+      "type": "object",
+      "description": "An amount in minor units (cents) of an ISO 4217 currency.",
+      "additionalProperties": false,
+      "required": [
+        "minorUnits",
+        "currency"
+      ],
+      "properties": {
+        "minorUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    },
+    "ReconciliationStatus": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Matched",
+        "Drift"
+      ],
+      "enum": [
+        "matched",
+        "drift"
+      ]
+    }
+  }
+}
