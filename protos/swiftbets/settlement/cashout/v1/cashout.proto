@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package swiftbets.settlement.cashout.v1;
+
+option csharp_namespace = "SwiftBets.Contracts.Grpc.Settlement.Cashout.V1";
+
+// Settlement's side of cashout. The cashout service prices from GetCashoutState and live odds; CashOut takes the
+// coupon's final-state lock and settles it at the agreed amount, so later results cannot change it.
+service Cashout {
+  rpc GetCashoutState (GetCashoutStateRequest) returns (CashoutState);
+  // Idempotent on cashout_id: a repeat returns the original reply with was_applied = false.
+  rpc CashOut (CashOutRequest) returns (CashOutReply);
+}
+
+message Money {
+  int64 minor_units = 1;
+  string currency = 2;
+}
+
+message GetCashoutStateRequest {
+  string coupon_id = 1;
+}
+
+enum LegState {
+  LEG_STATE_UNSPECIFIED = 0;
+  LEG_STATE_OPEN = 1;
+  LEG_STATE_WON = 2;
+  LEG_STATE_LOST = 3;
+  LEG_STATE_VOID = 4;
+}
+
+enum CouponState {
+  COUPON_STATE_UNSPECIFIED = 0;
+  // Not all legs resolved and not cashed out: the only state a cashout may be offered in.
+  COUPON_STATE_OPEN = 1;
+  COUPON_STATE_SETTLED = 2;
+  COUPON_STATE_CASHED_OUT = 3;
+}
+
+message CashoutLeg {
+  string leg_id = 1;
+  string fixture_id = 2;
+  string market_id = 3;
+  string selection_id = 4;
+  // Decimal odds at placement, as an invariant-culture string (no binary floating point for money inputs).
+  string placed_odds = 5;
+  LegState state = 6;
+  bool is_banker = 7;
+}
+
+message CashoutState {
+  string coupon_id = 1;
+  string punter_id = 2;
+  Money stake = 3;
+  CouponState state = 4;
+  repeated CashoutLeg legs = 5;
+  // True for a single or an accumulator (one bet, every leg in one line); system bets are not cashed out in v1.
+  bool single_line = 6;
+}
+
+message CashOutRequest {
+  string cashout_id = 1;
+  string coupon_id = 2;
+  string punter_id = 3;
+  Money amount = 4;
+}
+
+enum CashOutStatus {
+  CASH_OUT_STATUS_UNSPECIFIED = 0;
+  CASH_OUT_STATUS_ACCEPTED = 1;
+  CASH_OUT_STATUS_REFUSED = 2;
+}
+
+message CashOutReply {
+  CashOutStatus status = 1;
+  // Stable codes on REFUSED: coupon_not_found, coupon_settled, coupon_cashed_out, punter_mismatch, not_single_line.
+  string refusal_code = 2;
+  int32 settlement_version = 3;
+  bool was_applied = 4;
+}
