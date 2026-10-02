@@ -1,33 +1,5 @@
 // Generated from SwiftBets.Contracts. Do not edit; run `dotnet run --project tools/SwiftBets.Contracts.SchemaGen`.
 
-export interface CouponPlacedV1 {
-    couponId: string;
-    punterId: string;
-    betType: BetType;
-    stake: Money;
-    totalOdds: number;
-    potentialPayout: Money;
-    legs: CouponLegV1[];
-    placedAt: string;
-}
-
-export type BetType = "single" | "accumulator" | "system";
-
-/** An amount in minor units (cents) of an ISO 4217 currency. */
-export interface Money {
-    minorUnits: number;
-    currency: string;
-}
-
-export interface CouponLegV1 {
-    legId: string;
-    fixtureId: string;
-    marketId: string;
-    selectionId: string;
-    odds: number;
-    offerVersion: number;
-}
-
 export interface ResultPublishedV1 {
     fixtureId: string;
     resultVersion: number;
@@ -91,20 +63,6 @@ export interface LegEvaluatedV1 {
 
 export type LegOutcome = "won" | "lost" | "void";
 
-/** Stage two: the coupon's settlement at SettlementVersion. A result correction produces a higher version; payout moves only the difference between TargetPayout and what it has already paid. */
-export interface CouponSettledV1 {
-    couponId: string;
-    punterId: string;
-    settlementVersion: number;
-    outcome: CouponOutcome;
-    stake: Money;
-    effectiveOdds: number;
-    targetPayout: Money;
-    settledAt: string;
-}
-
-export type CouponOutcome = "won" | "lost" | "void" | "cashedOut";
-
 export interface StuckCouponV1 {
     couponId: string;
     reason: string;
@@ -125,6 +83,14 @@ export interface PayoutAttemptV1 {
     attempt: number;
     lastError: string | null;
     firstAttemptAt: string;
+}
+
+export type CouponOutcome = "won" | "lost" | "void" | "cashedOut";
+
+/** An amount in minor units (cents) of an ISO 4217 currency. */
+export interface Money {
+    minorUnits: number;
+    currency: string;
 }
 
 /** Named, not positional: a retried payout resumes at the step it failed on, whatever steps are added later. */
@@ -374,7 +340,7 @@ export interface PaymentDriftDetectedV1 {
     detectedAt: string;
 }
 
-/** A placed coupon with one or more bets over its legs. Replaces CouponPlacedV1, which is dual-published until 2.0.0. */
+/** A placed coupon with one or more bets over its legs. */
 export interface CouponPlacedV2 {
     couponId: string;
     punterId: string;
@@ -407,7 +373,7 @@ export interface CouponBetV2 {
     potentialPayout: Money;
 }
 
-/** A V2 coupon's settlement at SettlementVersion. The coupon is Won when it returns more than nothing but not only stakes back, Void when every line is void, otherwise Lost. Payout moves the difference between TargetPayout and what it has already paid, as with CouponSettledV1. */
+/** A V2 coupon's settlement at SettlementVersion. The coupon is Won when it returns more than nothing but not only stakes back, Void when every line is void, otherwise Lost. Payout moves the difference between TargetPayout and what it has already paid. */
 export interface CouponSettledV2 {
     couponId: string;
     punterId: string;

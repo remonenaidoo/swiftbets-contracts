@@ -14,7 +14,7 @@ public sealed record BetSettlementV2(
 /// <summary>
 /// A V2 coupon's settlement at <see cref="SettlementVersion"/>. The coupon is Won when it returns more than nothing
 /// but not only stakes back, Void when every line is void, otherwise Lost. Payout moves the difference between
-/// <see cref="TargetPayout"/> and what it has already paid, as with <see cref="CouponSettledV1"/>.
+/// <see cref="TargetPayout"/> and what it has already paid.
 /// </summary>
 public sealed record CouponSettledV2(
     Guid CouponId,

@@ -18,12 +18,10 @@ public static class ContractCatalog
 {
     public static IReadOnlyList<(string Name, Type Type)> Contracts { get; } =
     [
-        ($"{CouponPlacedV1.EventType}.v{CouponPlacedV1.EventVersion}", typeof(CouponPlacedV1)),
         ($"{ResultPublishedV1.EventType}.v{ResultPublishedV1.EventVersion}", typeof(ResultPublishedV1)),
         ($"{CouponRejectedV1.EventType}.v{CouponRejectedV1.EventVersion}", typeof(CouponRejectedV1)),
         ($"{FixtureChangedV1.EventType}.v{FixtureChangedV1.EventVersion}", typeof(FixtureChangedV1)),
         ($"{LegEvaluatedV1.EventType}.v{LegEvaluatedV1.EventVersion}", typeof(LegEvaluatedV1)),
-        ($"{CouponSettledV1.EventType}.v{CouponSettledV1.EventVersion}", typeof(CouponSettledV1)),
         ($"{StuckCouponV1.EventType}.v{StuckCouponV1.EventVersion}", typeof(StuckCouponV1)),
         ($"{PayoutAttemptV1.EventType}.v{PayoutAttemptV1.EventVersion}", typeof(PayoutAttemptV1)),
         ($"{PayoutCompletedV1.EventType}.v{PayoutCompletedV1.EventVersion}", typeof(PayoutCompletedV1)),

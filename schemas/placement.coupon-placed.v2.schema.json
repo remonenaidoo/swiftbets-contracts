@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "CouponPlacedV2",
   "type": "object",
-  "description": "A placed coupon with one or more bets over its legs. Replaces CouponPlacedV1, which is dual-published until 2.0.0.",
+  "description": "A placed coupon with one or more bets over its legs.",
   "additionalProperties": false,
   "required": [
     "couponId",

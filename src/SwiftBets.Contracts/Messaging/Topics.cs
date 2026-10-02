@@ -5,13 +5,11 @@ public static class Topics
     public const string FixtureChanged = "offer.fixture-changed.v1";
     public const string PriceChanged = "offer.price-changed.v1";
     public const string ResultPublished = "offer.result-published.v1";
-    public const string CouponPlaced = "placement.coupon-placed.v1";
     public const string CouponRejected = "placement.coupon-rejected.v1";
     public const string LedgerPosted = "wallet.ledger-posted.v1";
     public const string LegEvaluated = "settlement.leg-evaluated.v1";
-    public const string CouponSettled = "settlement.coupon-settled.v1";
 
-    /// <summary>V2 coupons (bets over legs, bankers); dual-published beside the V1 topics until 2.0.0.</summary>
+    /// <summary>Coupons as bets over legs, with bankers and system bets; the V1 coupon topics were removed in 2.0.0.</summary>
     public const string CouponPlacedV2 = "placement.coupon-placed.v2";
     public const string CouponSettledV2 = "settlement.coupon-settled.v2";
     public const string StuckCoupon = "settlement.stuck-coupon.v1";
@@ -53,8 +51,8 @@ public static class Topics
 
     public static IReadOnlyList<string> All { get; } =
     [
-        FixtureChanged, PriceChanged, ResultPublished, CouponPlaced, CouponRejected, LedgerPosted,
-        LegEvaluated, CouponSettled, StuckCoupon, PayoutRetry5Seconds, PayoutRetry1Minute,
+        FixtureChanged, PriceChanged, ResultPublished, CouponRejected, LedgerPosted,
+        LegEvaluated, StuckCoupon, PayoutRetry5Seconds, PayoutRetry1Minute,
         PayoutRetry15Minutes, PayoutDeadLetter, PayoutCompleted, IncidentRaised, IncidentUpdated,
         RemediationExecuted, LiabilityChanged, RiskAlert, UserRegistered, EmailVerified, AccountStatusChanged,
         SessionRevoked, AuditRecorded, NotificationRequested, LimitChanged, RestrictionsChanged, SelfExclusionStarted,

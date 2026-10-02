@@ -26,7 +26,7 @@ public sealed record CouponBetV2(
     Money.Money Stake,
     Money.Money PotentialPayout);
 
-/// <summary>A placed coupon with one or more bets over its legs. Replaces <see cref="CouponPlacedV1"/>, which is dual-published until 2.0.0.</summary>
+/// <summary>A placed coupon with one or more bets over its legs.</summary>
 public sealed record CouponPlacedV2(
     Guid CouponId,
     Guid PunterId,

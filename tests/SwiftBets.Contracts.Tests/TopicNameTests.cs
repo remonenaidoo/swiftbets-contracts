@@ -7,10 +7,10 @@ public sealed class TopicNameTests
     [Fact]
     public void Topic_name_carries_prefix_version_and_environment()
     {
-        var topic = TopicName.For(Topics.CouponPlaced, "dev");
+        var topic = TopicName.For(Topics.CouponPlacedV2, "dev");
 
-        topic.Value.ShouldBe("swiftbets.placement.coupon-placed.v1.dev");
-        topic.DeadLetter().Value.ShouldBe("swiftbets.placement.coupon-placed.v1.dev.dlq");
+        topic.Value.ShouldBe("swiftbets.placement.coupon-placed.v2.dev");
+        topic.DeadLetter().Value.ShouldBe("swiftbets.placement.coupon-placed.v2.dev.dlq");
     }
 
     [Theory]

@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "CouponSettledV2",
   "type": "object",
-  "description": "A V2 coupon's settlement at SettlementVersion. The coupon is Won when it returns more than nothing\nbut not only stakes back, Void when every line is void, otherwise Lost. Payout moves the difference between\nTargetPayout and what it has already paid, as with CouponSettledV1.",
+  "description": "A V2 coupon's settlement at SettlementVersion. The coupon is Won when it returns more than nothing\nbut not only stakes back, Void when every line is void, otherwise Lost. Payout moves the difference between\nTargetPayout and what it has already paid.",
   "additionalProperties": false,
   "required": [
     "couponId",
