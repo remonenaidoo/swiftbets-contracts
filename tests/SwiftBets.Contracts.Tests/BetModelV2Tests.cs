@@ -60,7 +60,7 @@ public sealed class BetModelV2Tests
         placedBack.Legs.ShouldBe(placed.Legs);
         placedBack.Bets[0].Folds.ShouldBe([2, 3]);
         JsonSerializer.Deserialize<CouponSettledV2>(JsonSerializer.Serialize(settled, ContractJson.Options), ContractJson.Options)!.Bets.ShouldBe(settled.Bets);
-        CouponPlacedV2.EventType.ShouldBe(CouponPlacedV1.EventType);
+        CouponPlacedV2.EventType.ShouldBe("placement.coupon-placed");
         CouponPlacedV2.EventVersion.ShouldBe(2);
         Topics.All.ShouldContain(Topics.CouponPlacedV2);
         Topics.All.ShouldContain(Topics.CouponSettledV2);
