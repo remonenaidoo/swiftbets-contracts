@@ -439,6 +439,46 @@ export interface ConfigEntryV1 {
     changedAt: string;
 }
 
+/** A trader's result, keyed by ManualResultId so a retry is idempotent. MarketId is set for Market scope, CouponId for Coupon scope; WinningSelectionId for Settle and Override; VoidFrom for TimeVoid. */
+export interface ManualResultV1 {
+    manualResultId: string;
+    scope: ManualResultScope;
+    action: ManualResultAction;
+    fixtureId: string;
+    marketId: string | null;
+    couponId: string | null;
+    winningSelectionId: string | null;
+    voidFrom: string | null;
+    reason: string;
+    operatorId: string;
+    issuedAt: string;
+}
+
+/** What a manual result applies to: one coupon, one market, or every market of a fixture. */
+export type ManualResultScope = "coupon" | "market" | "fixture";
+
+export type ManualResultAction = "settle" | "void" | "override" | "timeVoid";
+
+/** Settlement refused a manual result for one coupon; Code is stable, e.g. coupon_cashed_out. */
+export interface ManualResultRejectedV1 {
+    manualResultId: string;
+    couponId: string;
+    code: string;
+    message: string;
+    rejectedAt: string;
+}
+
+/** A market suspended, reopened or closed outside the feed. Source is trader, staleness or config. */
+export interface MarketStatusChangedV1 {
+    fixtureId: string;
+    marketId: string;
+    status: MarketStatus;
+    source: string;
+    reason: string;
+    operatorId: string | null;
+    changedAt: string;
+}
+
 /** RFC 7807 problem details plus a stable machine code and the request's correlation id. */
 export interface ErrorEnvelope {
     type: string;

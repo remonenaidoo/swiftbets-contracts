@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ManualResultV1",
+  "type": "object",
+  "description": "A trader's result, keyed by ManualResultId so a retry is idempotent. MarketId is set for Market scope,\nCouponId for Coupon scope; WinningSelectionId for Settle and Override; VoidFrom for TimeVoid.",
+  "additionalProperties": false,
+  "required": [
+    "manualResultId",
+    "scope",
+    "action",
+    "fixtureId",
+    "reason",
+    "operatorId",
+    "issuedAt"
+  ],
+  "properties": {
+    "manualResultId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "scope": {
+      "$ref": "#/definitions/ManualResultScope"
+    },
+    "action": {
+      "$ref": "#/definitions/ManualResultAction"
+    },
+    "fixtureId": {
+      "type": "string"
+    },
+    "marketId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "couponId": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "guid"
+    },
+    "winningSelectionId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "voidFrom": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "operatorId": {
+      "type": "string",
+      "format": "guid"
+    },
+    "issuedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "ManualResultScope": {
+      "type": "string",
+      "description": "What a manual result applies to: one coupon, one market, or every market of a fixture.",
+      "x-enumNames": [
+        "Coupon",
+        "Market",
+        "Fixture"
+      ],
+      "enum": [
+        "coupon",
+        "market",
+        "fixture"
+      ]
+    },
+    "ManualResultAction": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Settle",
+        "Void",
+        "Override",
+        "TimeVoid"
+      ],
+      "enum": [
+        "settle",
+        "void",
+        "override",
+        "timeVoid"
+      ]
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "MarketStatusChangedV1",
+  "type": "object",
+  "description": "A market suspended, reopened or closed outside the feed. Source is trader, staleness or config.",
+  "additionalProperties": false,
+  "required": [
+    "fixtureId",
+    "marketId",
+    "status",
+    "source",
+    "reason",
+    "changedAt"
+  ],
+  "properties": {
+    "fixtureId": {
+      "type": "string"
+    },
+    "marketId": {
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/definitions/MarketStatus"
+    },
+    "source": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "operatorId": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "guid"
+    },
+    "changedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "MarketStatus": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Open",
+        "Suspended",
+        "Closed"
+      ],
+      "enum": [
+        "open",
+        "suspended",
+        "closed"
+      ]
+    }
+  }
+}

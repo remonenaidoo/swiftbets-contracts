@@ -10,6 +10,7 @@ using SwiftBets.Contracts.Payout;
 using SwiftBets.Contracts.Placement;
 using SwiftBets.Contracts.Settlement;
 using SwiftBets.Contracts.Steward;
+using SwiftBets.Contracts.Trading;
 
 namespace SwiftBets.Contracts.SchemaGen;
 
@@ -49,6 +50,9 @@ public static class ContractCatalog
         ($"{CouponPlacedV2.EventType}.v{CouponPlacedV2.EventVersion}", typeof(CouponPlacedV2)),
         ($"{CouponSettledV2.EventType}.v{CouponSettledV2.EventVersion}", typeof(CouponSettledV2)),
         ($"{ConfigEntryV1.EventType}.v{ConfigEntryV1.EventVersion}", typeof(ConfigEntryV1)),
+        ($"{ManualResultV1.EventType}.v{ManualResultV1.EventVersion}", typeof(ManualResultV1)),
+        ($"{ManualResultRejectedV1.EventType}.v{ManualResultRejectedV1.EventVersion}", typeof(ManualResultRejectedV1)),
+        ($"{MarketStatusChangedV1.EventType}.v{MarketStatusChangedV1.EventVersion}", typeof(MarketStatusChangedV1)),
         ("error-envelope", typeof(ErrorEnvelope)),
     ];
 }
